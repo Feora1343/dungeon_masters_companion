@@ -13,7 +13,7 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
-        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        fullscreen: $scope.customFullscreen
       })
       .then(function(answer) {
         $scope.status = 'You said the information was "' + answer + '".';
@@ -29,7 +29,39 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
-        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        fullscreen: $scope.customFullscreen
+      })
+      .then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
+    };
+
+    $scope.inspirationDialog = function(ev) {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: '/views/dialogs/inspiration.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen
+      })
+      .then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
+    };
+
+    $scope.technologyDialog = function(ev) {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: '/views/dialogs/technology.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen
       })
       .then(function(answer) {
         $scope.status = 'You said the information was "' + answer + '".';
@@ -45,7 +77,7 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
-        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        fullscreen: $scope.customFullscreen
       })
       .then(function(answer) {
         $scope.status = 'You said the information was "' + answer + '".';
