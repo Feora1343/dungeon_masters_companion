@@ -1,18 +1,51 @@
-<div class="container">
-  <h1 class="lead">Login</h1>
-    <h1 class="lead alert alert-danger" role="alert" ng-if="vm.message != ''">{{vm.message}}</h2>
-    <form ng-submit="vm.login()">
-      <div>
-          <label for="username">Username:</label>
-          <input type="text" ng-model="vm.user.username" />
-      </div>
-      <div>
-          <label for="password">Password:</label>
-          <input type="password" ng-model="vm.user.password" />
-      </div>
-      <div>
-          <input class="btn btn-default" type="submit" name="submit" value="Log In" />
-          <a href="#!register">Register</a>
-      </div>
-    </form>
-</div>
+<div ng-cloak="" class="LoginForm" flex>
+        <div class="wrapper">
+           <md-content flex>
+              <div id='loginDialog'>
+                 <md-tabs class='loginTabs' md-dynamic-height md-no-ink md-stretch-tabs="always">
+                    <md-tabs-wrapper  class="tb-wrp md-stretch-tabs">
+                       <md-tab class="lbl-tabs"  label="Login">
+                          <md-content class="tab-content md-padding" flex>
+                            <form ng-submit="lc.login()">
+                             <md-input-container class="md-icon-float md-block">
+                                <md-icon aria-label="Username" md-font-icon="mi mi-person"></md-icon>
+                                <input ng-model="lc.user.username" type="username" placeholder="Username" ng-required="true">
+                             </md-input-container>
+                             <md-input-container class="md-icon-float md-block">
+                                <md-icon aria-label="Password" md-font-icon="mi mi-lock"></md-icon>
+                                <input ng-model="lc.user.password" type="password" placeholder="Password" ng-required="true">
+                             </md-input-container>
+                             <div layout="row" id="labels">
+                                <span flex></span>
+                                <div>
+                                   <md-button class="md-raised md-primary" type="submit" name="submit" value="Log In">Login</md-button>
+                                </div>
+                             </div>
+                            </form>
+                          </md-content>
+                       </md-tab>
+     
+                       <md-tab label="Sign up">
+                          <md-content class="md-padding" ng-controller="RegisterController as rc">
+                            <form ng-submit="rc.registerUser()">
+                             <md-input-container class="md-icon-float md-block">
+                                <md-icon aria-label="Username" md-font-icon="mi mi-person"></md-icon>
+                                <input ng-model="rc.user.username" type="username" placeholder="Username" ng-required="true">
+                             </md-input-container>
+                             <md-input-container class="md-icon-float md-block">
+                                <md-icon aria-label="Password" md-font-icon="mi mi-lock"></md-icon>
+                                <input ng-model="rc.user.password" type="password" placeholder="Password" ng-required="true">
+                             </md-input-container>
+                             <div layout="row" flex>
+                                <span flex></span>
+                                <md-button class="md-raised md-primary" type="submit" name="submit" value="Register">Submit</md-button>
+                             </div>
+                            </form>
+                          </md-content>
+                       </md-tab>
+                    </md-tabs-wrapper>
+                 </md-tabs>
+              </div>
+           </md-content>
+        </div>
+     </div>

@@ -72,8 +72,40 @@ li a {
   text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
 li a:hover {
   text-decoration: underline;
   color: #eee;
 }
+
+.fabToolbardemoBasicUsage md-fab-toolbar.md-right md-fab-trigger.align-with-text {
+  left: 7px; }
+
+  .LoginForm md-content {
+    background-color: transparent !important;
+    padding: 5% 10%;
+ }
+ 
+ .LoginForm md-content md-tabs md-tabs-wrapper {
+    background: #fff;
+ }
+ 
+ .LoginForm md-content h1:first-child {
+    margin-top: 0;
+ }
+ 
+ md-tabs md-ink-bar {
+    background: #c47135;
+    
+ }
+ 
+ #loginDialog {
+    background-color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.0em;
+    opacity: 0.8;
+    text-transform: none;
+ }
+
+ .mi {
+   position: absolute;
+ }

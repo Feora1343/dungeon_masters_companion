@@ -1,5 +1,5 @@
 const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'ngAnimate'])
-  .controller('FabToolbar', function($scope) {
+  .controller('FabToolbar', function($scope, $mdDialog) {
     $scope.isOpen = false;
     $scope.header = {
         isOpen: false,
@@ -7,6 +7,22 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         selectedDirection: 'left'
     }
   })
+
+  // $scope.showAlert = function(ev) {
+  //   // Appending dialog to document.body to cover sidenav in docs app
+  //   // Modal dialogs should fully cover application
+  //   // to prevent interaction outside of dialog
+  //   $mdDialog.show(
+  //     $mdDialog.alert()
+  //       .parent(angular.element(document.querySelector('#popupContainer')))
+  //       .clickOutsideToClose(true)
+  //       .title('This is an alert title')
+  //       .textContent('You can specify some description text in here.')
+  //       .ariaLabel('Alert Dialog Demo')
+  //       .ok('Got it!')
+  //       .targetEvent(ev)
+  //   );
+  // };
 /// Routes ///
 myApp.config(['$routeProvider', '$locationProvider', '$mdIconProvider', function($routeProvider, $locationProvider, $mdIconProvider) {
   console.log('myApp -- config')
@@ -15,15 +31,11 @@ myApp.config(['$routeProvider', '$locationProvider', '$mdIconProvider', function
             .fontSet('fa', 'FontAwesome');
   $routeProvider
     .when('/', {
-      redirectTo: 'home'
+      redirectTo: 'home',
     })
     .when('/home', {
       templateUrl: '/views/templates/home.html',
-      controller: 'LoginController as vm',
-    })
-    .when('/register', {
-      templateUrl: '/views/templates/register.html',
-      controller: 'LoginController as vm'
+      controller: 'LoginController as lc',
     })
     .when('/user', {
       templateUrl: '/views/templates/user.html',
