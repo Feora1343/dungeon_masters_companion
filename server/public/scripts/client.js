@@ -1,8 +1,18 @@
-var myApp = angular.module('myApp', ['ngRoute']);
-
+const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'ngAnimate'])
+  .controller('FabToolbar', function($scope) {
+    $scope.isOpen = false;
+    $scope.header = {
+        isOpen: false,
+        count: 0,
+        selectedDirection: 'left'
+    }
+  })
 /// Routes ///
-myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+myApp.config(['$routeProvider', '$locationProvider', '$mdIconProvider', function($routeProvider, $locationProvider, $mdIconProvider) {
   console.log('myApp -- config')
+  $mdIconProvider
+            .defaultFontSet('FontAwesome')
+            .fontSet('fa', 'FontAwesome');
   $routeProvider
     .when('/', {
       redirectTo: 'home'
