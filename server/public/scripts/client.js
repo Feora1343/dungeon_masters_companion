@@ -15,11 +15,6 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         clickOutsideToClose:true,
         fullscreen: $scope.customFullscreen
       })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
-      });
     };
 
     $scope.profileDialog = function(ev) {
@@ -31,11 +26,6 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         clickOutsideToClose:true,
         fullscreen: $scope.customFullscreen
       })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
-      });
     };
 
     $scope.inspirationDialog = function(ev) {
@@ -47,11 +37,6 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         clickOutsideToClose:true,
         fullscreen: $scope.customFullscreen
       })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
-      });
     };
 
     $scope.technologyDialog = function(ev) {
@@ -63,11 +48,6 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         clickOutsideToClose:true,
         fullscreen: $scope.customFullscreen
       })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
-      });
     };
 
     $scope.aboutDialog = function(ev) {
@@ -79,11 +59,6 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         clickOutsideToClose:true,
         fullscreen: $scope.customFullscreen
       })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
-      });
     };
 
     function DialogController($scope, $mdDialog) {
