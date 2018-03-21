@@ -104,8 +104,18 @@ li a:hover {
     font-size: 1.0em;
     opacity: 0.8;
     text-transform: none;
+    max-width: 500px;
+    margin: auto;
  }
 
- .mi {
+ md-fab-toolbar md-toolbar.pevents__initial {
+  pointer-events: initial;
+}
+
+ /* .mi {
    position: absolute;
  }
+
+ .mi-menu {
+   position: relative;
+ } */

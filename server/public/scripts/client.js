@@ -8,6 +8,10 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
     }
   })
 
+  setTimeout(function() {
+    var elem = document.getElementsByClassName('pevents__initial')
+    elem[0].classList.remove('pevents__initial')
+    }, 2000);
   // $scope.showAlert = function(ev) {
   //   // Appending dialog to document.body to cover sidenav in docs app
   //   // Modal dialogs should fully cover application
