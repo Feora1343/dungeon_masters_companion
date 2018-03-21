@@ -8,15 +8,15 @@
            </md-fab-trigger>
            <md-toolbar class='pevents__initial'>
                <md-fab-actions class="md-toolbar-tools">
-                   <md-button aria-label="Changelog" class="md-icon-button">
+                   <md-button aria-label="Changelog" class="md-icon-button" ng-click="changelogDialog($event)">
                         <md-tooltip md-direction="bottom">Changelog</md-tooltip>
                        <md-icon md-font-icon="mi mi-history"></md-icon>
                    </md-button>
-                   <md-button aria-label="Profile" class="md-icon-button">
+                   <md-button aria-label="Profile" class="md-icon-button" ng-click="profileDialog($event)">
                         <md-tooltip md-direction="bottom">Profile</md-tooltip>
                         <md-icon md-font-icon="mi mi-person"></md-icon>
                     </md-button>
-                    <md-button aria-label="About" class="md-icon-button">
+                    <md-button aria-label="About" class="md-icon-button" ng-click="aboutDialog($event)">
                             <md-tooltip md-direction="bottom">About</md-tooltip>
                             <md-icon md-font-icon="mi mi-info"></md-icon>
                         </md-button>
