@@ -14,7 +14,7 @@ myApp.controller('RegisterController', ['$http', '$location', 'UserService', fun
         console.log('sending to server...', self.user);
         $http.post('/api/user/register', self.user).then(function (response) {
           console.log('success');
-          $location.path('/home');
+          $location.path('/user');
         },
           function (response) {
             console.log('error');
