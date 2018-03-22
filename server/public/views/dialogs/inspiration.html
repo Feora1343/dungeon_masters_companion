@@ -1,71 +1,151 @@
-<md-dialog aria-label="Inspirations">
-  <form ng-cloak>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Inspirations</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-font-icon="mi mi-close" aria-label="Close dialog"></md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
+<md-dialog aria-label="Inspirations" style="max-width:800px;max-height:810px;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Inspirations</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="mi mi-close" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
 
-    <md-dialog-content class="md-padding" layout="column">
-       <div class="md-dialog-content" layout="column">
-          <md-card class="inspiration">
-              <md-card-title class="md-padding">
-                  <md-card-title-media>
-                      <img src="/images/about/mattcolville.png" class="md-card-image" alt="This is Matt Colville!">
-                  </md-card-title-media>
-                <md-card-title-text>
-                    <span class="md-title" >Matt Colville</span>
-                    <span class="md-display1"><i>"Hey everybody, Matt Colville here."</i></span>
-                    <br />
-                    <span class="subhead">Matt Colville is a writer and designer in the video game business, but before that he was also a designer in the tabletop business.</span>
-                    <span class="subhead">He is really passionate about helping others get into the game of Dungeons and Dragons, especially as Dungeon Masters.</span>
-                    <br />
-                    <span class="subhead">You can find Matt on <a href="https://www.youtube.com/user/mcolville">Youtube</a>, <a href="https://www.twitch.tv/mattcolville">Twitch</a>, <a href="https://twitter.com/mattcolville">Twitter</a> and <a href="reddit.com/r/mattcolville/">Reddit</a>.</span>
-                    <span class="subhead">Drop him a tweet if you like his videos and material, he's pretty active with his fanbase.</span>
-                </md-card-title-text>
-              </md-card-title>
-          </md-card>
-
-          <md-card class="inspiration"> 
-              <md-card-title class="md-padding">
-                  <md-card-title-media>
-                      <img src="/images/about/jimmurphy.png" class="md-card-image" alt="This is Jim Murphy!">
-                  </md-card-title-media>
-                  <md-card-title-text>
-                      <span class="md-title">Jim Murphy</span>
-                      <span class="md-display1"><i>"Fight me, devils, fight! For I hate peace."</i></span>
-                      <br />
-                      <span class="subhead">Jim Muphy a table top gamer that started back in the 60's with board games, miniatures and RPGs in the 70's and CCG since the start.</span>
-                      <span class="subhead">He has been around the business for over 40 years and just recently started recording videos.</span>
-                      <br />
-                      <span class="subhead">You can find Jim on <a href="https://www.youtube.com/channel/UCdMl19aDv5e_2l_AeJRXp2g">Youtube</a> and <a href="https://twitter.com/game_methuselah">Twitter</a>.</span>
-                      <span class="subhead">Drop him a tweet if you like his videos and material, it's very rare to have someone in this business for over four decades.</span>
-                  </md-card-title-text>
-              </md-card-title>
-          </md-card>
-
-          <md-card>
-              <md-card-title class="md-padding" class="inspiration">
-                  <md-card-title-media>
-                      <img src="/images/about/mattmercer.png" class="md-card-image" alt="This is Matt Mercer!">
-                  </md-card-title-media>
-                <md-card-title-text>
-                    <span class="md-title">Matt Mercer</span>
-                    <span class="md-display1"><i>"Welcome to tonight's episode of Critical Role where a bunch of nerdy ass voice actors play Dungeons and Dragons!"</i></span>
-                    <br />
-                    <span class="subhead">Matt Mercer is a professional voice actor in aniamtion and video games, but also a professional dungeon master.</span>
-                    <span class="subhead">If you don't know Matt for being the dungeon master of Critical Role, you might know him from Overwatch as McCree.</span>
-                    <br />
-                    <span class="subhead">You can find Matt on <a href="https://www.youtube.com/geekandsundry">Youtube</a>, <a href="https://www.twitch.tv/geekandsundry">Twitch</a>, <a href="https://twitter.com/matthewmercer">Twitter</a> and <a href="reddit.com/r/criticalrole/">Reddit</a>.</span>
-                    <span class="subhead">Matt Mercer is known as Good Matt, while Matt Colville is known as Evil Matt.</span>
-                </md-card-title-text>
-              </md-card-title>
-          </md-card>
-        </div>
-      </md-dialog-content>
+        <md-dialog-content style="max-width:800px;max-height:810px;">
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Matt Colville">
+                    <md-content class="md-padding">
+                        <md-card>
+                            <md-card-title class="md-padding">
+                                <md-card-title-media>
+                                    <img src="/images/about/mattcolville.png" class="md-card-image" alt="This is Matt Colville!">
+                                </md-card-title-media>
+                                <md-card-title-text>
+                                    <span class="md-title">Matt Colville</span>
+                                    <span class="md-display1">
+                                        <i>"Hey everybody, Matt Colville here."</i>
+                                    </span>
+                                    <br />
+                                    <span class="subhead">Matt Colville is a writer and designer in the video game business, but before that he
+                                        was also a designer in the tabletop business. He is really passionate about helping
+                                        others get into the game of Dungeons and Dragons, especially as Dungeon Masters.</span>
+                                    <br />
+                                    <span class="subhead">You can find Matt on
+                                        <a href="https://www.youtube.com/user/mcolville" target="_blank">Youtube</a>,
+                                        <a href="https://www.twitch.tv/mattcolville" target="_blank">Twitch</a>,
+                                        <a href="https://twitter.com/mattcolville" target="_blank">Twitter</a> and
+                                        <a href="https://www.reddit.com/r/mattcolville/" target="_blank">Reddit</a>. Drop him a tweet if you like his videos and material, he's pretty active
+                                        with his fanbase.</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                        </md-card>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Jim Murphy">
+                    <md-card>
+                        <md-card-title class="md-padding">
+                            <md-card-title-media>
+                                <img src="/images/about/jimmurphy.png" class="md-card-image" alt="This is Jim Murphy!">
+                            </md-card-title-media>
+                            <md-card-title-text>
+                                <span class="md-title">Jim Murphy</span>
+                                <span class="md-display1">
+                                    <i>"Fight me, devils, fight! For I hate peace."</i>
+                                </span>
+                                <br />
+                                <span class="subhead">Jim Muphy a table top gamer that started back in the 60's with board games, miniatures and
+                                    RPGs in the 70's and CCG since the start. He has been around the business for over 40
+                                    years and just recently started recording videos.</span>
+                                <br />
+                                <span class="subhead">You can find Jim on
+                                    <a href="https://www.youtube.com/channel/UCdMl19aDv5e_2l_AeJRXp2g" target="_blank">Youtube</a> and
+                                    <a href="https://twitter.com/game_methuselah" target="_blank">Twitter</a>. Drop him a tweet if you like his videos and material, it's very rare to
+                                    have someone in this business for over four decades.</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                </md-tab>
+                <md-tab label="Matt Mercer">
+                    <md-card>
+                        <md-card-title class="md-padding">
+                            <md-card-title-media>
+                                <img src="/images/about/mattmercer.png" class="md-card-image" alt="This is Matt Mercer!">
+                            </md-card-title-media>
+                            <md-card-title-text>
+                                <span class="md-title">Matt Mercer</span>
+                                <span class="md-display1">
+                                    <i>"I love Dugeons &amp; Dragons!"</i>
+                                </span>
+                                <br />
+                                <span class="subhead">Matt Mercer is a professional voice actor in aniamtion and video games, but also a professional
+                                    dungeon master. If you don't know Matt for being the dungeon master of Critical Role,
+                                    you might know him from Overwatch as McCree.</span>
+                                <br />
+                                <span class="subhead">You can find Matt on
+                                    <a href="https://twitter.com/matthewmercer" target="_blank">Twitter</a>. Matt Mercer is known as Good Matt, while Matt Colville is known as Evil
+                                    Matt.
+                                </span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                </md-tab>
+                <md-tab label="Critical Role">
+                    <md-card>
+                        <md-card-title class="md-padding">
+                            <md-card-title-media>
+                                <img src="/images/about/criticalrole.png" class="md-card-image" alt="This is Critical Role!">
+                            </md-card-title-media>
+                            <md-card-title-text>
+                                <span class="md-title">Critical Role</span>
+                                <span class="md-display1">
+                                    <i>"Hello everyone, and welcome to tonight's episode of Critical Role, where a bunch of
+                                        us nerdy-ass voice actors sit around and play Dungeons &amp; Dragons!"</i>
+                                </span>
+                                <br />
+                                <span class="subhead">Critical Role is an American web series produced by Geek &amp; Sundry in which a group of
+                                    professional voice actors play Dungeons &amp; Dragons.</span>
+                                <br />
+                                <span class="subhead">You can watch Critical Role on
+                                    <a href="https://www.youtube.com/geekandsundry" target="_blank">Youtube</a> and
+                                    <a href="https://www.twitch.tv/geekandsundry" target="_blank">Twitch</a>.</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                </md-tab>
+                <md-tab label="D&amp;D">
+                    <md-card>
+                        <md-card-title class="md-padding">
+                            <md-card-title-media>
+                                <img src="/images/about/dungeonsanddragons.png" class="md-card-image" alt="This is Dungeons &amp; Dragons!">
+                            </md-card-title-media>
+                            <md-card-title-text>
+                                <span class="md-title">Dungeons &amp; Dragons</span>
+                                <span class="md-display1">
+                                    <i>"The essence of a role-playing game is that it is a group, cooperative experience."</i>
+                                    - Gary Gygax
+                                </span>
+                                <br />
+                                <span class="subhead">The first Dungeons &amp; Dragons game was played back when Gary Gygax and Dave Arneson chose
+                                    to personalize the massive battles of their fantasy wargames with the exploits of individual
+                                    heroes. This inspiration became the first fantasy roleplaying game, in which players
+                                    are characters in an ongoing fantasy story. This new kind of game has become immensely
+                                    popular over the years, and D&amp;D has grown to include many new ways to vividly experience
+                                    worlds of heroic fantasy.</span>
+                                <br />
+                                <span class="subhead">The core of D&amp;D is storytelling. You and your friends tell a story together, guiding
+                                    your heroes through quests for treasure, battles with deadly foes, daring rescues, courtly
+                                    intrigue, and much more. You can also explore the world of Dungeons &amp; Dragons through
+                                    any of the novels written by its fantasy authors, as well as engaging board games and
+                                    immersive video games. All of these stories are part of D&amp;D.</span>
+                                <br />
+                                <span class="subhead">You can checkout Dungeons &amp; Dragons at
+                                    <a href="https://www.dndbeyond.com/" target="_blank">D&amp;D Beyond</a>,
+                                    <a href="https://dnd.wizards.com/" target="_blank">Official Website</a>, and
+                                    <a href="https://www.twitch.tv/dnd" target="_blank">Twitch</a>.</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
     </form>
-  </md-dialog>
+</md-dialog>

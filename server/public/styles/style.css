@@ -1,8 +1,29 @@
-body, html {
+/* set background image per page */
+
+.login-bg {
+  background: url(../images/backgrounds/dungeonsanddragons6.jpg) no-repeat center center fixed;
+  background-size: contain;
+}
+
+.about-bg {
+  background: url(images/about.bg.jpg) no-repeat center center fixed;
+}
+
+.contact-bg {
+  background: url(images/contact-bg.jpg) no-repeat center center fixed;
+}
+
+body,
+html {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   font-size: 14px;
+  background-color: #333333;
+}
+
+main {
+  height: 90%;
 }
 
 .instructions .container h1 {
@@ -24,8 +45,8 @@ body, html {
   margin-top: 10px;
 }
 
-.container p{
-  margin-top : 14px;
+.container p {
+  margin-top: 14px;
 }
 
 .message {
@@ -37,14 +58,14 @@ body, html {
 }
 
 .message:nth-child(odd) {
-   background-color: #eeeeee;
+  background-color: #eeeeee;
 }
 
 .message:nth-child(even) {
   background-color: #f8f8f8;
 }
 
-.btn-danger{
+.btn-danger {
   margin-left: 10px;
 }
 
@@ -78,37 +99,37 @@ li a:hover {
 }
 
 .fabToolbardemoBasicUsage md-fab-toolbar.md-right md-fab-trigger.align-with-text {
-  left: 7px; }
+  left: 7px;
+}
 
-  .LoginForm md-content {
-    background-color: transparent !important;
-    padding: 5% 10%;
- }
- 
- .LoginForm md-content md-tabs md-tabs-wrapper {
-    background: #fff;
- }
- 
- .LoginForm md-content h1:first-child {
-    margin-top: 0;
- }
- 
- md-tabs md-ink-bar {
-    background: #c47135;
-    
- }
- 
- #loginDialog {
-    background-color: #fff;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.0em;
-    opacity: 0.8;
-    text-transform: none;
-    max-width: 500px;
-    margin: auto;
- }
+.LoginForm md-content {
+  background-color: transparent !important;
+  padding: 5% 10%;
+}
 
- md-fab-toolbar md-toolbar.pevents__initial {
+.LoginForm md-content md-tabs md-tabs-wrapper {
+  background: #fff;
+}
+
+.LoginForm md-content h1:first-child {
+  margin-top: 0;
+}
+
+md-tabs md-ink-bar {
+  background: #c47135;
+}
+
+#loginDialog {
+  background-color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.0em;
+  opacity: 0.8;
+  text-transform: none;
+  max-width: 500px;
+  margin: auto;
+}
+
+md-fab-toolbar md-toolbar.pevents__initial {
   pointer-events: initial;
 }
 

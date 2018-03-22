@@ -1,92 +1,92 @@
 const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'ngAnimate'])
-  .controller('FabToolbar', function($scope, $mdDialog) {
+  .controller('FabToolbar', function ($scope, $mdDialog) {
     $scope.isOpen = false;
     $scope.header = {
-        isOpen: false,
-        count: 0,
-        selectedDirection: 'left'
+      isOpen: false,
+      count: 0,
+      selectedDirection: 'left'
     }
-    $scope.changelogDialog = function(ev) {
+    $scope.changelogDialog = function (ev) {
       $mdDialog.show({
         controller: DialogController,
         templateUrl: '/views/dialogs/changelog.html',
         parent: angular.element(document.body),
         targetEvent: ev,
-        clickOutsideToClose:true,
+        clickOutsideToClose: true,
         fullscreen: $scope.customFullscreen
       })
     };
 
-    $scope.profileDialog = function(ev) {
+    $scope.profileDialog = function (ev) {
       $mdDialog.show({
         controller: DialogController,
         templateUrl: '/views/dialogs/profile.html',
         parent: angular.element(document.body),
         targetEvent: ev,
-        clickOutsideToClose:true,
+        clickOutsideToClose: true,
         fullscreen: $scope.customFullscreen
       })
     };
 
-    $scope.inspirationDialog = function(ev) {
+    $scope.inspirationDialog = function (ev) {
       $mdDialog.show({
         controller: DialogController,
         templateUrl: '/views/dialogs/inspiration.html',
         parent: angular.element(document.body),
         targetEvent: ev,
-        clickOutsideToClose:true,
+        clickOutsideToClose: true,
         fullscreen: $scope.customFullscreen
       })
     };
 
-    $scope.technologyDialog = function(ev) {
+    $scope.technologyDialog = function (ev) {
       $mdDialog.show({
         controller: DialogController,
         templateUrl: '/views/dialogs/technology.html',
         parent: angular.element(document.body),
         targetEvent: ev,
-        clickOutsideToClose:true,
+        clickOutsideToClose: true,
         fullscreen: $scope.customFullscreen
       })
     };
 
-    $scope.aboutDialog = function(ev) {
+    $scope.aboutDialog = function (ev) {
       $mdDialog.show({
         controller: DialogController,
         templateUrl: '/views/dialogs/about.html',
         parent: angular.element(document.body),
         targetEvent: ev,
-        clickOutsideToClose:true,
+        clickOutsideToClose: true,
         fullscreen: $scope.customFullscreen
       })
     };
 
     function DialogController($scope, $mdDialog) {
-      $scope.hide = function() {
+      $scope.hide = function () {
         $mdDialog.hide();
       };
-  
-      $scope.cancel = function() {
+
+      $scope.cancel = function () {
         $mdDialog.cancel();
       };
-  
-      $scope.answer = function(answer) {
+
+      $scope.answer = function (answer) {
         $mdDialog.hide(answer);
       };
     }
   })
 
-  setTimeout(function() {
-    var elem = document.getElementsByClassName('pevents__initial')
-    elem[0].classList.remove('pevents__initial')
-    }, 2000);
+setTimeout(function () {
+  var elem = document.getElementsByClassName('pevents__initial')
+  elem[0].classList.remove('pevents__initial')
+}, 2000);
 
 /// Routes ///
-myApp.config(['$routeProvider', '$locationProvider', '$mdIconProvider', function($routeProvider, $locationProvider, $mdIconProvider) {
+myApp.config(['$routeProvider', '$locationProvider', '$mdIconProvider', function ($routeProvider, $locationProvider, $mdIconProvider) {
   console.log('myApp -- config')
   $mdIconProvider
-            .defaultFontSet('FontAwesome')
-            .fontSet('fa', 'FontAwesome');
+    .defaultFontSet('FontAwesome')
+    .fontSet('fa', 'FontAwesome');
   $routeProvider
     .when('/', {
       redirectTo: 'home',
@@ -99,7 +99,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$mdIconProvider', function
       templateUrl: '/views/templates/user.html',
       controller: 'UserController as vm',
       resolve: {
-        getuser : function(UserService){
+        getuser: function (UserService) {
           return UserService.getuser();
         }
       }
@@ -108,7 +108,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$mdIconProvider', function
       templateUrl: '/views/templates/info.html',
       controller: 'InfoController as vm',
       resolve: {
-        getuser : function(UserService){
+        getuser: function (UserService) {
           return UserService.getuser();
         }
       }
