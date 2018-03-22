@@ -104,7 +104,7 @@ li a:hover {
 
 .LoginForm md-content {
   background-color: transparent !important;
-  padding: 5% 10%;
+  padding: 10% 10% 10% 10%;
 }
 
 .LoginForm md-content md-tabs md-tabs-wrapper {
@@ -136,3 +136,7 @@ md-fab-toolbar md-toolbar.pevents__initial {
 .md-card-image {
   padding: 5px;
 }
+
+/* .changelog {
+  width: 50%;
+} */
