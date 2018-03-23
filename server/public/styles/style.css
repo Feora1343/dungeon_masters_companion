@@ -1,12 +1,11 @@
-/* set background image per page */
-
 .login-bg {
   background: url(../images/backgrounds/dungeonsanddragons6.jpg) no-repeat center center fixed;
   background-size: contain;
 }
 
-.about-bg {
-  background: url(images/about.bg.jpg) no-repeat center center fixed;
+.user-bg {
+  background: url(../images/backgrounds/dungeonsanddragons2.jpg) no-repeat center center fixed;
+  background-size: contain;
 }
 
 .contact-bg {
@@ -23,8 +22,9 @@ html {
 }
 
 main {
-  height: 90%;
+  height: 80%;
 }
+
 
 .instructions .container h1 {
   font-size: 32px;
@@ -115,6 +115,20 @@ li a:hover {
   margin-top: 0;
 }
 
+.UserForm md-content {
+  background-color: transparent !important;
+  padding: 2% 5% 2% 5%;
+}
+
+.UserForm md-content md-tabs md-tabs-wrapper {
+  background: #fff;
+}
+
+.UserForm md-content h1:first-child {
+  margin-top: 0;
+}
+
+
 md-tabs md-ink-bar {
   background: #c47135;
 }
@@ -137,6 +151,13 @@ md-fab-toolbar md-toolbar.pevents__initial {
   padding: 5px;
 }
 
-/* .changelog {
-  width: 50%;
-} */
+.spacer {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.welcome {
+  margin: 0px 0px;
+  color: white;
+}

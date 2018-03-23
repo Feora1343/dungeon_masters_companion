@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.4",
+    "@uirouter/angularjs": "^1.0.15",
     "angular": "^1.6.9",
     "angular-animate": "^1.6.9",
     "angular-aria": "^1.6.9",

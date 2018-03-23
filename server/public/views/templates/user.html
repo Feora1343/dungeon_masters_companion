@@ -1,5 +1,51 @@
-<!-- <div ng-include="'views/partials/nav.html'"></div> -->
-<div class="container">
-    <h1 id="welcome" class="lead">Welcome, {{vm.userObject.userName}}!</h1>
-    <button class="btn btn-default" ng-click="vm.userService.logout()">Log Out</button>
+<div class="user-bg">
+    <div ng-cloak="" class="UserForm" flex>
+        <div class="wrapper">
+            <md-content class="md-padding layout-row">
+                <div flex-xs flex-gt-xs="50" layout="row">
+                    <md-card style="opacity: 0.8;height:550px">
+                        <img src="/images/banners/5etools_banner.png" class="md-card-image" alt="5eTools!">
+                        <md-card-title>
+                            <md-card-title-text>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+                        </md-card-content>
+                    </md-card>
+                </div>
+                <div flex-xs flex-gt-xs="50" layout="row">
+                    <md-card style="opacity: 0.8;">
+                        <img src="/images/banners/createcampaign_banner.png" class="md-card-image" alt="5eTools!">
+                        <md-card-title>
+                            <md-card-title-text>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+                        </md-card-content>
+                    </md-card>
+                </div>
+        </div>
+        </md-content>
+    </div>
 </div>
+</div>
+
+<!-- <div class="user-bg">
+    <div ng-cloak="" class="UserForm" flex>
+        <div class="wrapper">
+            <h1 id="welcome" class="welcome">Welcome, {{vm.userObject.userName}}!</h1>
+            <md-button aria-label="Profile" class="md-icon-button" ng-click="vm.userService.logout()">
+                <md-tooltip md-direction="bottom">Sign Out</md-tooltip>
+                <md-icon md-font-icon="mi mi-power-settings-new"></md-icon>
+            </md-button>
+            <br />
+            <section style="display: inline-block;">
+                <P>View 1</p>
+            </section>
+
+            <section style="display: inline-block;" 5x>
+                <p>View 2</p>
+            </section>
+        </div>
+    </div>
+</div> -->
