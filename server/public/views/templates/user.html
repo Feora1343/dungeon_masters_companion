@@ -1,6 +1,6 @@
 <div class="user-bg">
     <div layout="row">
-        <h3 flex style="margin: 0 0 0 60px;"layout="row" id="welcome" class="welcome">Welcome, {{vm.userObject.userName}}!</h3>
+        <h3 flex style="margin: 0 0 0 60px;" layout="row" id="welcome" class="welcome">Welcome, {{vm.userObject.userName}}!</h3>
         <md-button style="margin: 0 60px 0 0;" aria-label="Sign out" class="md-fab md-mini" ng-click="vm.userService.logout()">
             <md-tooltip md-direction="left">Sign Out</md-tooltip>
             <md-icon md-font-icon="mi mi-power-settings-new"></md-icon>
@@ -20,7 +20,7 @@
                         </md-card-content>
                     </md-card>
                 </div>
-                <div flex-xs flex-gt-xs="50" layout="row">
+                <div flex-xs flex-gt-xs="50" layout="row" ng-include="''">
                     <md-card style="opacity: 0.8;">
                         <img src="/images/banners/createcampaign_banner.png" class="md-card-image" alt="5eTools!">
                         <md-card-title>
@@ -31,25 +31,49 @@
                         </md-card-content>
                     </md-card>
                 </div>
+                <div ng-controller="FabToolbar" layout="row" ng-cloak>
+                        <div class="lock-size" layout="row" layout-align="center center">
+                                <md-fab-speed-dial md-open="sidebar.isOpen" md-direction="{{sidebar.selectedDirection}}"
+                                                   ng-class="sidebar.selectedMode">
+                            <md-fab-trigger>
+                                <md-button aria-label="menu" class="md-fab md-mini md-primary">
+                                    <md-icon md-font-icon="mi mi-menu"></md-icon>
+                                </md-button>
+                            </md-fab-trigger>
+                            <md-fab-actions>
+                                <md-button aria-label="Create Campaign" class="md-fab md-raised md-mini md-primary">
+                                        <md-tooltip md-direction="right">Create Campaign</md-tooltip>
+                                    <md-icon md-font-icon="mi mi-create"></md-icon>
+                                </md-button>
+                                <md-button aria-label="Select Campaign" class="md-fab md-raised md-mini md-primary">
+                                        <md-tooltip md-direction="right">Select Campaign</md-tooltip>
+                                    <md-icon md-font-icon="mi mi-content-copy"></md-icon>
+                                </md-button>
+                                <md-button aria-label="Manage Campaign" class="md-fab md-raised md-mini md-primary">
+                                        <md-tooltip md-direction="right">Manage Campaign</md-tooltip>
+                                    <md-icon md-font-icon="mi mi-mode-edit"></md-icon>
+                                </md-button>
+                                <md-button aria-label="Player Characters" class="md-fab md-raised md-mini md-primary">
+                                        <md-tooltip md-direction="right">Player Characters</md-tooltip>
+                                    <md-icon md-font-icon="mi mi-person-pin"></md-icon>
+                                </md-button>
+                                <md-button aria-label="Create Encounter" class="md-fab md-raised md-mini md-primary">
+                                        <md-tooltip md-direction="right">Create Encounter</md-tooltip>
+                                    <md-icon md-font-icon="mi mi-playlist-add"></md-icon>
+                                </md-button>
+                                <md-button aria-label="Edit Encounter" class="md-fab md-raised md-mini md-primary">
+                                        <md-tooltip md-direction="right">Edit Encounter</md-tooltip>
+                                    <md-icon md-font-icon="mi mi-text-format"></md-icon>
+                                </md-button>
+                                <md-button aria-label="Initiative Tracker" class="md-fab md-raised md-mini md-primary">
+                                        <md-tooltip md-direction="right">Initiative Tracker</md-tooltip>
+                                        <md-icon md-font-icon="mi mi-track-changes"></md-icon>
+                                    </md-button>
+                            </md-fab-actions>
+                        </md-fab-speed-dial>
+                    </div>
+                </div>
+            </md-content>
         </div>
-        </md-content>
     </div>
 </div>
-</div>
-
-<!-- 
-            <md-button aria-label="Profile" class="md-icon-button" ng-click="vm.userService.logout()">
-                <md-tooltip md-direction="bottom">Sign Out</md-tooltip>
-                <md-icon md-font-icon="mi mi-power-settings-new"></md-icon>
-            </md-button>
-            <br />
-            <section style="display: inline-block;">
-                <P>View 1</p>
-            </section>
-
-            <section style="display: inline-block;" 5x>
-                <p>View 2</p>
-            </section>
-        </div>
-    </div>
-</div> -->

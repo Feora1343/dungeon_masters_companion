@@ -1,4 +1,4 @@
-const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'ngAnimate'])
+const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'ngAnimate', 'ui.router'])
   .controller('FabToolbar', function ($scope, $mdDialog) {
     $scope.isOpen = false;
     $scope.header = {
@@ -6,6 +6,24 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
       count: 0,
       selectedDirection: 'left'
     }
+    $scope.sidebar = {
+      isOpen: false,
+      count: 0,
+      selectedDirection: 'down',
+      selectedMode: 'md-fling'
+    }
+
+      // this.topDirections = ['left', 'up'];
+      // this.bottomDirections = ['down', 'right'];
+  
+      // 
+  
+      // this.availableModes = ['md-fling', 'md-scale'];
+      // this.selectedMode = 'md-fling';
+  
+      // this.availableDirections = ['up', 'down', 'left', 'right'];
+      // this.selectedDirection = 'up';
+
     $scope.changelogDialog = function (ev) {
       $mdDialog.show({
         controller: DialogController,
@@ -75,7 +93,7 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
       };
     }
   })
-
+  
 setTimeout(function () {
   var elem = document.getElementsByClassName('pevents__initial')
   elem[0].classList.remove('pevents__initial')
