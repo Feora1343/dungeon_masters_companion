@@ -115,8 +115,8 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         $mdDialog.hide(answer);
       };
     }
-    
-    $scope.icons = [{
+
+    $scope.classes = [{
         value: 'Male Barbarian',
         image: './images/characters/barbarian_male_alive.gif'
       },
