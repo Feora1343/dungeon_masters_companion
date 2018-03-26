@@ -91,6 +91,17 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
       })
     };
 
+    $scope.createCharacterDialog = function (ev) {
+      $mdDialog.show({
+        controller: CampaignDialogController,
+        templateUrl: '/views/dialogs/createcharacter.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: $scope.customFullscreen
+      })
+    };
+
     function CampaignDialogController($scope, $mdDialog) {
       $scope.hide = function () {
         $mdDialog.hide();
@@ -104,6 +115,104 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         $mdDialog.hide(answer);
       };
     }
+    
+    $scope.icons = [{
+        value: 'Male Barbarian',
+        image: './images/characters/barbarian_male_alive.gif'
+      },
+      {
+        value: 'Female Barbarian',
+        image: './images/characters/barbarian_female_alive.gif'
+      },
+      {
+        value: 'Male Bard',
+        image: './images/characters/bard_male_alive.gif'
+      },
+      {
+        value: 'Female Bard',
+        image: './images/characters/bard_female_alive.gif'
+      },
+      {
+        value: 'Male Cleric',
+        image: './images/characters/cleric_male_alive.gif'
+      },
+      {
+        value: 'Female Cleric',
+        image: './images/characters/cleric_female_alive.gif'
+      },
+      {
+        value: 'Male Druid',
+        image: './images/characters/druid_male_alive.gif'
+      },
+      {
+        value: 'Female Druid',
+        image: './images/characters/druid_female_alive.gif'
+      },
+      {
+        value: 'Male Fighter',
+        image: './images/characters/fighter_male_alive.gif'
+      },
+      {
+        value: 'Female Fighter',
+        image: './images/characters/fighter_female_alive.gif'
+      },
+      {
+        value: 'Male Monk',
+        image: './images/characters/monk_male_alive.gif'
+      },
+      {
+        value: 'Female Monk',
+        image: './images/characters/monk_female_alive.gif'
+      },
+      {
+        value: 'Male Paladin',
+        image: './images/characters/paladin_male_alive.gif'
+      },
+      {
+        value: 'Female Paladin',
+        image: './images/characters/paladin_female_alive.gif'
+      },
+      {
+        value: 'Male Ranger',
+        image: './images/characters/ranger_male_alive.gif'
+      },
+      {
+        value: 'Female Ranger',
+        image: './images/characters/ranger_female_alive.gif'
+      },
+      {
+        value: 'Male Rogue',
+        image: './images/characters/rogue_male_alive.gif'
+      },
+      {
+        value: 'Female Rogue',
+        image: './images/characters/rogue_female_alive.gif'
+      },
+      {
+        value: 'Male Sorcerer',
+        image: './images/characters/sorcerer_male_alive.gif'
+      },
+      {
+        value: 'Female Sorcerer',
+        image: './images/characters/sorcerer_female_alive.gif'
+      },
+      {
+        value: 'Male Warlock',
+        image: './images/characters/warlock_male_alive.gif'
+      },
+      {
+        value: 'Female Warlock',
+        image: './images/characters/warlock_female_alive.gif'
+      },
+      {
+        value: 'Male Wizard',
+        image: './images/characters/wizard_male_alive.gif'
+      },
+      {
+        value: 'Female Wizard',
+        image: './images/characters/wizard_female_alive.gif'
+      }
+    ];
   })
 
 setTimeout(function () {
@@ -114,7 +223,7 @@ setTimeout(function () {
 /// Routes ///
 myApp.config(['$routeProvider', '$locationProvider', '$mdIconProvider', function ($routeProvider, $locationProvider, $mdIconProvider) {
   console.log('myApp -- config')
-  
+
   $mdIconProvider
     .defaultFontSet('FontAwesome')
     .fontSet('fa', 'FontAwesome');
