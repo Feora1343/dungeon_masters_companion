@@ -1,4 +1,4 @@
-const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'ngAnimate', 'ui.router'])
+const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'ngAnimate'])
   .controller('FabToolbar', function ($scope, $mdDialog) {
     $scope.isOpen = false;
     $scope.header = {
@@ -6,23 +6,6 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
       count: 0,
       selectedDirection: 'left'
     }
-    $scope.sidebar = {
-      isOpen: false,
-      count: 0,
-      selectedDirection: 'down',
-      selectedMode: 'md-fling'
-    }
-
-      // this.topDirections = ['left', 'up'];
-      // this.bottomDirections = ['down', 'right'];
-  
-      // 
-  
-      // this.availableModes = ['md-fling', 'md-scale'];
-      // this.selectedMode = 'md-fling';
-  
-      // this.availableDirections = ['up', 'down', 'left', 'right'];
-      // this.selectedDirection = 'up';
 
     $scope.changelogDialog = function (ev) {
       $mdDialog.show({
@@ -92,8 +75,37 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         $mdDialog.hide(answer);
       };
     }
+
   })
-  
+
+  .controller('ManageCampaign', function ($scope, $mdDialog) {
+
+    $scope.createCampaignDialog = function (ev) {
+      $mdDialog.show({
+        controller: CampaignDialogController,
+        templateUrl: '/views/dialogs/createcampaign.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: $scope.customFullscreen
+      })
+    };
+
+    function CampaignDialogController($scope, $mdDialog) {
+      $scope.hide = function () {
+        $mdDialog.hide();
+      };
+
+      $scope.cancel = function () {
+        $mdDialog.cancel();
+      };
+
+      $scope.answer = function (answer) {
+        $mdDialog.hide(answer);
+      };
+    }
+  })
+
 setTimeout(function () {
   var elem = document.getElementsByClassName('pevents__initial')
   elem[0].classList.remove('pevents__initial')
@@ -102,9 +114,11 @@ setTimeout(function () {
 /// Routes ///
 myApp.config(['$routeProvider', '$locationProvider', '$mdIconProvider', function ($routeProvider, $locationProvider, $mdIconProvider) {
   console.log('myApp -- config')
+  
   $mdIconProvider
     .defaultFontSet('FontAwesome')
     .fontSet('fa', 'FontAwesome');
+
   $routeProvider
     .when('/', {
       redirectTo: 'home',
@@ -122,15 +136,15 @@ myApp.config(['$routeProvider', '$locationProvider', '$mdIconProvider', function
         }
       }
     })
-    .when('/info', {
-      templateUrl: '/views/templates/info.html',
-      controller: 'InfoController as vm',
-      resolve: {
-        getuser: function (UserService) {
-          return UserService.getuser();
-        }
-      }
-    })
+    // .when('/info', {
+    //   templateUrl: '/views/templates/info.html',
+    //   controller: 'InfoController as vm',
+    //   resolve: {
+    //     getuser: function (UserService) {
+    //       return UserService.getuser();
+    //     }
+    //   }
+    // })
     .otherwise({
       template: '<h1>404</h1>'
     });

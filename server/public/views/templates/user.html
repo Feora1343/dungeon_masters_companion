@@ -11,49 +11,86 @@
             <md-content class="md-padding layout-row">
                 <div flex-xs flex-gt-xs="50" layout="row" ng-include="'/views/dmc/tools.html'">
                 </div>
-                <div flex-xs flex-gt-xs="50" layout="row" ng-include="'/views/dmc/createcampaign.html'">
-                </div>
-                <div ng-controller="FabToolbar" layout="row" ng-cloak>
-                        <div class="lock-size" layout="row" layout-align="center center">
-                                <md-fab-speed-dial md-open="sidebar.isOpen" md-direction="{{sidebar.selectedDirection}}"
-                                                   ng-class="sidebar.selectedMode">
-                            <md-fab-trigger>
-                                <md-button aria-label="menu" class="md-fab md-mini md-primary">
-                                    <md-icon md-font-icon="mi mi-menu"></md-icon>
-                                </md-button>
-                            </md-fab-trigger>
-                            <md-fab-actions>
-                                <md-button aria-label="Create Campaign" class="md-fab md-raised md-mini md-primary">
-                                        <md-tooltip md-direction="right">Create Campaign</md-tooltip>
-                                    <md-icon md-font-icon="mi mi-create"></md-icon>
-                                </md-button>
-                                <md-button aria-label="Select Campaign" class="md-fab md-raised md-mini md-primary">
-                                        <md-tooltip md-direction="right">Select Campaign</md-tooltip>
-                                    <md-icon md-font-icon="mi mi-content-copy"></md-icon>
-                                </md-button>
-                                <md-button aria-label="Manage Campaign" class="md-fab md-raised md-mini md-primary">
-                                        <md-tooltip md-direction="right">Manage Campaign</md-tooltip>
-                                    <md-icon md-font-icon="mi mi-mode-edit"></md-icon>
-                                </md-button>
-                                <md-button aria-label="Player Characters" class="md-fab md-raised md-mini md-primary">
-                                        <md-tooltip md-direction="right">Player Characters</md-tooltip>
-                                    <md-icon md-font-icon="mi mi-person-pin"></md-icon>
-                                </md-button>
-                                <md-button aria-label="Create Encounter" class="md-fab md-raised md-mini md-primary">
-                                        <md-tooltip md-direction="right">Create Encounter</md-tooltip>
-                                    <md-icon md-font-icon="mi mi-playlist-add"></md-icon>
-                                </md-button>
-                                <md-button aria-label="Edit Encounter" class="md-fab md-raised md-mini md-primary">
-                                        <md-tooltip md-direction="right">Edit Encounter</md-tooltip>
-                                    <md-icon md-font-icon="mi mi-text-format"></md-icon>
-                                </md-button>
-                                <md-button aria-label="Initiative Tracker" class="md-fab md-raised md-mini md-primary">
-                                        <md-tooltip md-direction="right">Initiative Tracker</md-tooltip>
-                                        <md-icon md-font-icon="mi mi-track-changes"></md-icon>
-                                    </md-button>
-                            </md-fab-actions>
-                        </md-fab-speed-dial>
-                    </div>
+                <div flex-xs flex-gt-xs="50" layout="row">
+                    <md-card style="opacity: 0.8;height:600px">
+                        <div id="dmcDialog">
+                            <md-tabs flex layout="column" md-stretch-tabs="always" class="dmcTabs" md-dynamic-height md-no-ink md-stretch-tabs="auto">
+                                <md-tabs-wrapper class="tb-wrp md-stretch-tabs">
+
+                                    <md-tab label="Manage Campaigns">
+                                        <md-content class="tab-content md-padding" ng-controller="ManageCampaign">
+                                            <!-- Add Controller: CreateCampaign as cc -->
+                                            <div layout="row" id="labels">
+                                                <form flex-gt-xs="50" ng-submit="cc.createCampaign()">
+                                                    <md-button ng-click="createCampaignDialog($event)" class="md-raised md-primary" type="submit" name="submit" value="Create Campaign">Create Campaign</md-button>
+                                                </form>
+                                                <md-select flex-gt-xs="50" placeholder="Select Campaign" ng-model="campaign" md-on-open="loadCampaign()" style="max-width: 200px;">
+                                                    <md-option ng-value="campaign" ng-repeat="campaign_name in campaigns">{{campaign.campaign_name}}</md-option>
+                                            </div>
+                                            </md-select>
+                                        </md-content>
+                                    </md-tab>
+
+                                    <md-tab label="Manage Characters">
+                                        <md-content class="md-padding" ng-controller="RegisterController as rc">
+                                            <form ng-submit="rc.registerUser()">
+                                                <md-input-container class="md-icon-float md-block">
+                                                    <md-icon style="position: absolute;" aria-label="Username" md-font-icon="mi mi-person"></md-icon>
+                                                    <input ng-model="rc.user.username" type="username" placeholder="Username" ng-required="true">
+                                                </md-input-container>
+                                                <md-input-container class="md-icon-float md-block">
+                                                    <md-icon style="position: absolute;" aria-label="Password" md-font-icon="mi mi-lock"></md-icon>
+                                                    <input ng-model="rc.user.password" type="password" placeholder="Password" ng-required="true">
+                                                </md-input-container>
+                                                <div layout="row" flex>
+                                                    <span flex></span>
+                                                    <md-button class="md-raised md-primary" type="submit" name="submit" value="Register">Register</md-button>
+                                                </div>
+                                            </form>
+                                        </md-content>
+                                    </md-tab>
+
+                                    <md-tab label="Manage Encounters">
+                                        <md-content class="md-padding" ng-controller="RegisterController as rc">
+                                            <form ng-submit="rc.registerUser()">
+                                                <md-input-container class="md-icon-float md-block">
+                                                    <md-icon style="position: absolute;" aria-label="Username" md-font-icon="mi mi-person"></md-icon>
+                                                    <input ng-model="rc.user.username" type="username" placeholder="Username" ng-required="true">
+                                                </md-input-container>
+                                                <md-input-container class="md-icon-float md-block">
+                                                    <md-icon style="position: absolute;" aria-label="Password" md-font-icon="mi mi-lock"></md-icon>
+                                                    <input ng-model="rc.user.password" type="password" placeholder="Password" ng-required="true">
+                                                </md-input-container>
+                                                <div layout="row" flex>
+                                                    <span flex></span>
+                                                    <md-button class="md-raised md-primary" type="submit" name="submit" value="Register">Register</md-button>
+                                                </div>
+                                            </form>
+                                        </md-content>
+                                    </md-tab>
+
+                                    <md-tab label="Initiative Tracker">
+                                        <md-content class="md-padding" ng-controller="RegisterController as rc">
+                                            <form ng-submit="rc.registerUser()">
+                                                <md-input-container class="md-icon-float md-block">
+                                                    <md-icon style="position: absolute;" aria-label="Username" md-font-icon="mi mi-person"></md-icon>
+                                                    <input ng-model="rc.user.username" type="username" placeholder="Username" ng-required="true">
+                                                </md-input-container>
+                                                <md-input-container class="md-icon-float md-block">
+                                                    <md-icon style="position: absolute;" aria-label="Password" md-font-icon="mi mi-lock"></md-icon>
+                                                    <input ng-model="rc.user.password" type="password" placeholder="Password" ng-required="true">
+                                                </md-input-container>
+                                                <div layout="row" flex>
+                                                    <span flex></span>
+                                                    <md-button class="md-raised md-primary" type="submit" name="submit" value="Register">Register</md-button>
+                                                </div>
+                                            </form>
+                                        </md-content>
+                                    </md-tab>
+                                </md-tabs-wrapper>
+                            </md-tabs>
+                        </div>
+                    </md-card>
                 </div>
             </md-content>
         </div>

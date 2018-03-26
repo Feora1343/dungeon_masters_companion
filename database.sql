@@ -1,4 +1,4 @@
-/*Schema as of 3/20/18 */
+/*Schema as of 3/24/18 */
 
 CREATE TABLE "users" (
   "id" serial primary key,
@@ -42,7 +42,3 @@ CREATE TABLE "monster_encounter" (
   "monster_id" serial NOT NULL,
   "encounter_id" int NOT NULL
 );
-
-
-
-
