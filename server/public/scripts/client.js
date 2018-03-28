@@ -102,7 +102,29 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
       })
     };
 
-    function CampaignDialogController($scope, $mdDialog) {
+    $scope.createMonsterDialog = function (ev) {
+      $mdDialog.show({
+        controller: CampaignDialogController,
+        templateUrl: '/views/dialogs/createmonster.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: $scope.customFullscreen
+      })
+    };
+
+    $scope.createEncounterDialog = function (ev) {
+      $mdDialog.show({
+        controller: CampaignDialogController,
+        templateUrl: '/views/dialogs/createencounter.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: $scope.customFullscreen
+      })
+    };
+
+    function CampaignDialogController($scope, $mdDialog, $element) {
       $scope.hide = function () {
         $mdDialog.hide();
       };
@@ -114,6 +136,23 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
       $scope.answer = function (answer) {
         $mdDialog.hide(answer);
       };
+
+      $scope.characterList = ['{{campaign.campaign_id.character.character_name}}'];
+      $scope.searchTerm;
+      $scope.clearSearchTerm = function() {
+        $scope.searchTerm = '';
+      };
+
+      $scope.monsterList = ['{{campaign.campaign_id.monster.monster_name}}'];
+      $scope.searchTerm;
+      $scope.clearSearchTerm = function() {
+        $scope.searchTerm = '';
+      };
+
+      $element.find('input').on('keydown', function(ev) {
+          ev.stopPropagation();
+      });
+
     }
 
     $scope.classes = [{
@@ -212,6 +251,64 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
         value: 'Female Wizard',
         image: './images/characters/wizard_female_alive.gif'
       }
+    ];
+
+    $scope.monsters = [{
+        value: 'Abberation',
+        image: './images/monsters/aberration.jpg'
+      },
+      {
+        value: 'Beast',
+        image: './images/monsters/beast.jpg'
+      },
+      {
+        value: 'Celestial',
+        image: './images/monsters/celestial.jpg'
+      },
+      {
+        value: 'Construct',
+        image: './images/monsters/construct.jpg'
+      },
+      {
+        value: 'Dragon',
+        image: './images/monsters/dragon.jpg'
+      },
+      {
+        value: 'Elemental',
+        image: './images/monsters/elemental.jpg'
+      },
+      {
+        value: 'Fey',
+        image: './images/monsters/fey.jpg'
+      },
+      {
+        value: 'Fiend',
+        image: './images/monsters/fiend.jpg'
+      },
+      {
+        value: 'Giant',
+        image: './images/monsters/giant.jpg'
+      },
+      {
+        value: 'Humanoid',
+        image: './images/monsters/humanoid.jpg'
+      },
+      {
+        value: 'Monstrosity',
+        image: './images/monsters/monstrosity.jpg'
+      },
+      {
+        value: 'Ooze',
+        image: './images/monsters/ooze.jpg'
+      },
+      {
+        value: 'Plant',
+        image: './images/monsters/plant.jpg'
+      },
+      {
+        value: 'Undead',
+        image: './images/monsters/undead.jpg'
+      },
     ];
   })
 

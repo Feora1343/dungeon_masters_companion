@@ -17,11 +17,11 @@
                 <form ng-submit="mc.createCampaign()">
                     <md-input-container class="md-icon-float md-block">
                         <md-icon style="position: absolute;" aria-label="Campaign Name" md-font-icon="mi mi-person"></md-icon>
-                        <input ng-model="mc.campaign.name" type="campaign name" placeholder="Campaign Name" ng-required="true">
+                        <input flex-gt-xs="50" ng-model="mc.campaign.name" type="campaign name" placeholder="Campaign Name" ng-required="true">
                     </md-input-container>
                     <md-input-container class="md-icon-float md-block">
                         <md-icon style="position: absolute;" aria-label="Campaign Notes" md-font-icon="mi mi-note-add"></md-icon>
-                        <input ng-model="mc.campaign.notes" type="campaign notes" placeholder="Campaign Notes" ng-required="false">
+                        <input flex-gt-xs="50" ng-model="mc.campaign.notes" type="campaign notes" placeholder="Campaign Notes" ng-required="false">
                     </md-input-container>
                     <div layout="row" flex>
                         <span flex></span>

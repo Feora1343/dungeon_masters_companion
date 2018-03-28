@@ -19,19 +19,59 @@
 
                                     <md-tab label="Manage Campaigns">
                                         <md-content class="tab-content md-padding" ng-controller="ManageCampaign">
-                                            <!-- Add Controller: CreateCampaign as cc -->
                                             <div layout="row" id="labels">
-                                                <form flex-gt-xs="50" ng-submit="cc.createCampaign()">
-                                                    <md-button ng-click="createCampaignDialog($event)" class="md-raised md-primary" type="submit" name="submit" value="Create Campaign">Create Campaign</md-button>
-                                                </form>
-                                                <md-select flex-gt-xs="50" placeholder="Select Campaign" ng-model="campaign" md-on-open="loadCampaign()" style="max-width: 200px;">
-                                                    <md-option ng-value="campaign" ng-repeat="campaign_name in campaigns">{{campaign.campaign_name}}</md-option>
-                                            </md-select>
-                                        </div>
-                                        <form flex-gt-xs="50" ng-submit="cc.createCharacter()">
-                                                <md-button ng-click="createCharacterDialog($event)" class="md-raised md-primary" type="submit" name="submit" value="Create Character">Create Character</md-button>
-                                            </form>
+                                                <md-card>
+                                                    <form flex-gt-xs="50">
+                                                        <md-button style="width:175px;" ng-click="createCampaignDialog($event)" class="md-raised md-primary" type="submit" name="submit"
+                                                            value="Create Campaign">Create Campaign</md-button>
+                                                    </form>
+                                                    <form flex-gt-xs="50" ng-submit="cc.createCharacter()">
+                                                        <md-button style="width:175px;" ng-click="createCharacterDialog($event)" class="md-raised md-primary" type="submit" name="submit"
+                                                            value="Create Character">Create Character</md-button>
+                                                    </form>
+                                                    <md-button style="width:175px;" ng-click="createMonsterDialog($event)"
+                                                        class="md-raised md-primary" type="submit" name="submit" value="Create Monster">Create Monster</md-button>
+                                                    </form>
+                                                    <form flex-gt-xs="50" ng-submit="cc.createEncounter()">
+                                                        <md-button style="width:175px;" ng-click="createEncounterDialog($event)" class="md-raised md-primary" type="submit" name="submit"
+                                                            value="Create Encounter">Create Encounter</md-button>
+                                                    </form>
+                                                </md-card>
+                                                <md-card>
+                                                    <md-select flex placeholder="Select Campaign" ng-model="campaign" md-on-open="loadCampaign()" style="width: 300px;">
+                                                        <md-option ng-value="campaign" ng-repeat="campaign_name in campaigns">{{campaign.campaign_name}}</md-option>
+                                                    </md-select>
+                                                    <h3 center style="text-align:center;vertical-align: middle;line-height: 30px;">Campaign {{ campaign ? campaign.name : 'Not' }} Loaded!</h3>
+                                                </md-card>
+                                            </div>
+                                            <div layout="row" id="labels">
+                                                <md-card style="width:175px">
+                                                    <md-title>
+                                                        <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Campaign Notes</h4>
+                                                    </md-title>
+                                                    <md-content>
+                                                        <hr />
+                                                    </md-content>
+                                                    <span>{{campaign.campaign_notes}}</span>
                                         </md-content>
+                                        </md-card>
+                                        <md-card style="width:175px">
+                                            <md-title>
+                                                <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Characters</h4>
+                                            </md-title>
+                                            <md-content>
+                                                <hr />
+                                            </md-content>
+                                        </md-card>
+                                        <md-card style="width:175px">
+                                            <md-title>
+                                                <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Encounters</h4>
+                                            </md-title>
+                                            <md-content>
+                                                <hr />
+                                            </md-content>
+                                        </md-card>
+                                        </div>
                                     </md-tab>
 
                                     <md-tab label="Manage Characters">

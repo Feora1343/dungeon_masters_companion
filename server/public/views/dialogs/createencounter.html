@@ -1,0 +1,92 @@
+<md-dialog aria-label="Create Encounter">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Create Encounter</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-font-icon="mi mi-close" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content class="md-padding" layout="row">
+            <div class="md-dialog-content">
+                <md-card>
+                    <md-content style="width:800px;" class="md-padding" ng-controller="ManageCampaign as mc">
+                        <form ng-submit="mc.createCharacter()">
+                            <md-select style="float:left;" flex-gt-xs="50" placeholder="Select Campaign" ng-model="campaign" md-on-open="loadCampaign()">
+                                <md-option ng-value="campaign" ng-repeat="campaign_name in campaigns">{{campaign.campaign_name}}</md-option>
+                            </md-select>
+                            <md-title>
+                                <h3 flex-gt-xs="50" style="margin:0;text-align:center;vertical-align: middle;line-height: 30px;">Campaign {{ campaign ? campaign.name : 'Not' }} Loaded!</h3>
+                            </md-title>
+                            <md-input-container class="md-icon-float md-block">
+                                <md-icon style="position: absolute;" aria-label="Encounter Name" md-font-icon="mi mi-person"></md-icon>
+                                <input ng-model="mc.encounter.name" type="encounter name" placeholder="Encounter Name" ng-required="true">
+                            </md-input-container>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-icon-float md-block" flex-gt-xs="50">
+                                    <md-icon style="position: absolute;" aria-label="Characters" md-font-icon="mi mi-add-a-photo"></md-icon>
+                                    <md-select placeholder="Select Characters" ng-model="mc.classes" md-on-close="clearSearchTerm" data-md-container-class="characterSelectHeader"
+                                        multiple>
+                                        <md-select-header class="select-header">
+                                            <input aria-label="Search" ng-model="searchTerm" type="search" class="header-searchbox">
+                                        </md-select-header>
+                                        <md-select-label>
+                                            <img ng-src="{{ classes.image }}" />
+                                        </md-select-label>
+                                        <md-optgroup label="Select Characters">
+                                            <md-option ng-repeat="class in classes track by $index | filter:searchTerm" ng-value="class.value">
+                                                <div layout="row">
+                                                    <img style="zoom:50%;" ng-src="{{class.image}}" />
+                                                    <p style="font-size:75%;padding:0px 5px;">{{class.value}}</p>
+                                                </div>
+                                            </md-option>
+                                        </md-optgroup>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container flex-gt-xs="50" class="md-icon-float md-block">
+                                    <md-icon style="position: absolute;" aria-label="Monsters" md-font-icon="mi mi-add-a-photo"></md-icon>
+                                    <md-select placeholder="Select Monsters" ng-model="mc.monsters" md-on-close="clearSearchTerm" data-md-container-class="characterSelectHeader"
+                                        multiple>
+                                        <md-select-header class="select-header">
+                                            <input aria-label="Search" ng-model="searchTerm" type="search" class="header-searchbox">
+                                        </md-select-header>
+                                        <md-select-label>
+                                            <img ng-src="{{ monsters.image }}" />
+                                        </md-select-label>
+                                        <md-optgroup label="Select Monsters">
+                                            <md-option ng-repeat="monster in monsters track by $index | filter:searchTerm" ng-value="monster.value">
+                                                <div layout="row">
+                                                    <img style="zoom:50%;" ng-src="{{monster.image}}" />
+                                                    <p style="font-size:75%;padding:0px 5px;">{{monster.value}}</p>
+                                                </div>
+                                            </md-option>
+                                        </md-optgroup>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div layout="row" flex>
+                                <md-container flex-gt-xs="50" ng-value="character" ng-repeat="character_name in encounter_character">
+                                    <md-title>
+                                        <h3 flex-gt-xs="50" style="margin:0;text-align:center;vertical-align: middle;line-height: 30px;">Character {{ character ? character.character_name : 'Not' }} Loaded!</h3>
+                                    </md-title>
+                                </md-container>
+                                <md-container flex-gt-xs="50" ng-value="monster" ng-repeat="monster_name in encounter_monster">
+                                    <md-title>
+                                        <h3 flex-gt-xs="50" style="margin:0;text-align:center;vertical-align: middle;line-height: 30px;">Monster {{ monster ? monster.monster_name : 'Not' }} Loaded!</h3>
+                                    </md-title>
+                                </md-container>
+                            </div>
+                            <div layout="row" flex>
+                                <span flex></span>
+                                <md-button class="md-raised md-primary" type="submit" name="submit" value="Create Encounter">Create Encounter</md-button>
+                            </div>
+                        </form>
+                    </md-content>
+                </md-card>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

@@ -17,14 +17,27 @@
                         <form ng-submit="mc.createCharacter()">
                             <md-input-container class="md-icon-float md-block">
                                 <md-icon style="position: absolute;" aria-label="Character Name" md-font-icon="mi mi-person"></md-icon>
-                                <input ng-model="mc.character.name" type="character name" placeholder="Character Name" ng-required="true">
+                                <input flex-gt-xs="50" ng-model="mc.character.name" type="character name" placeholder="Character Name" ng-required="true">
                             </md-input-container>
                             <md-input-container class="md-icon-float md-block">
-                                <md-icon style="position: absolute;" aria-label="Character Class" md-font-icon="mi mi-add-a-photo"></md-icon>
+                                <md-icon style="position: absolute;" aria-label="Character Class" md-font-icon="mi mi-photo"></md-icon>
                                 <md-select flex-gt-xs="50" placeholder="Select Character Class" ng-model="mc.classes">
-                                    <md-select-label><img ng-src="{{ classes.image }}"/></md-select-label>
-                                    <md-option ng-repeat="class in classes track by $index" ng-value="class.value"><div layout="row"><img ng-src="{{class.image}}"/><p>{{class.value}}</p></div></md-option>
-                                    </md-select>
+                                    <md-select-label>
+                                        <img ng-src="{{ classes.image }}" />
+                                    </md-select-label>
+                                    <md-option ng-repeat="class in classes track by $index" ng-value="class.value">
+                                        <div layout="row">
+                                            <img style="zoom:50%;" ng-src="{{class.image}}" />
+                                            <p style="font-size:75%;padding:0px 5px;">{{class.value}}</p>
+                                        </div>
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container class="md-icon-float md-block">
+                                <md-icon style="position: absolute;" aria-label="Select Campaign" md-font-icon="mi mi-person"></md-icon>
+                                <md-select flex-gt-xs="50" placeholder="Select Campaign" ng-model="campaign" md-on-open="loadCampaign()">
+                                    <md-option ng-value="campaign" ng-repeat="campaign_name in campaigns">{{campaign.campaign_name}}</md-option>
+                                </md-select>
                             </md-input-container>
                             <div layout="row" flex>
                                 <span flex></span>
