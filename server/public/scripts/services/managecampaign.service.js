@@ -2,13 +2,13 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     console.log('CampaignService Loaded');
     var self = this;
 
-    // Storage for character list
-    self.characterList = {
+    // Storage for campaign list
+    self.campaignList = {
         list: []
     }
 
-    // Storage for campaign list
-    self.campaignList = {
+    // Storage for character list
+    self.characterList = {
         list: []
     }
 
@@ -23,33 +23,24 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     }
 
     self.showAddCampaign = false;
+    self.showAddCharacter = false;
+    self.showAddMonster = false;
+    self.showAddEncounter = false;
 
-    // Get Character list
-    self.getCharacterList = function () {
-        $http.get('/api/campaign/character')
-            .then(function (response) {
-                self.characterList.list = response.data;
-            })
-            .catch(function (error) {
-                self.message = "Something has gone terribly wrong!"
-            })
-    }
-
-    // get Campaign list
-    self.getCampaignList = function (id) {
-        $http.get(`/api/campaign/user/${id}`)
+    // GET Campaign list
+    self.getCampaigns = function (id) {
+        $http.get(`/api/campaign/users/${id}`)
             .then(function (response) {
                 self.campaignList.list = response.data;
-                self.campaignCount = self.campaignList.list;
             })
             .catch(function (error) {
                 self.message = "Something has gone terribly wrong!"
             })
     }
 
-    // Add Campaign POST
+    // POST Create Campaign
     self.addCampaign = function (campaign, user_id) {
-        if (campaign.campaign_name === '' || campaign.notes === '') {
+        if (campaign.campaign_name === '' || campaign.campaign_notes === '') {
             self.message = "Enter a campaign name and a description!"
         } else {
             $http.post('/api/campaign', campaign)
@@ -64,32 +55,87 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
         }
     }
 
-    // Campaign DELETE request - Not Implemented At This Time
-    // self.deleteCampaign = function (campaign, user_id) {
-    //     if (!id) {
-    //         swal("No campaign selected, Select a campaign to delete.")
-    //     } else {
-    //         swal({
-    //                 text: "Are you sure you want to delete this campaign?",
-    //                 icon: "warning",
-    //                 buttons: ["Nope", "Yes, delete this campaign."],
-    //                 closeOnClickOutisde: false
-    //             })
-    //             .then((willDelete) => {
-    //                 if (willDelete) {
-    //                     const campaign_id = id;
-    //                     $http.delete(`/api/campaign/${campaign_id}`)
-    //                         .then(function (response) {
-    //                             swal("The campaign has been deleted.");
-    //                             self.getCampaignList(user_id);
-    //                         })
-    //                         .catch(function (error) {
-    //                             self.message = "Something went terribly wrong!"
-    //                         })
-    //                 } else {
-    //                     swal("The campaign will not be deleted.")
-    //                 }
-    //             })
-    //     }
-    // }
+    // GET Character list
+    self.getCharacterList = function (campaign_id) {
+        $http.get('/api/character')
+            .then(function (response) {
+                self.characterList.list = response.data;
+            })
+            .catch(function (error) {
+                self.message = "Something has gone terribly wrong!"
+            })
+    }
+
+    // POST Create Character
+    self.addCharacter = function (character, campaign_id) {
+        if (character.campaign_name === '' || character.character_icon === '') {
+            self.message = "Enter a character name and a description!"
+        } else {
+            $http.post('/api/character', character)
+                .then(function (response) {
+                    self.showAddCharacter = false;
+                    self.getCharacterList(campaign_id);
+                    swal('The campaign was added!')
+                })
+                .catch(function (error) {
+                    self.message = "Something has gone terribly wrong!"
+                })
+        }
+    }
+
+    // GET Monster list
+    self.getMonsterList = function (id) {
+        $http.get('/api/monster')
+            .then(function (response) {
+                self.monsterList.list = response.data;
+            })
+            .catch(function (error) {
+                self.message = "Something has gone terribly wrong!"
+            })
+    }
+
+    // POST Monster Character
+    self.addMonster = function (monster, encounter_id) {
+        if (monster.monster_name === '' || monster.monster_icon === '') {
+            self.message = "Enter a character name and a description!"
+        } else {
+            $http.post('/api/monster', monster)
+                .then(function (response) {
+                    self.showAddMonster = false;
+                    self.getMonsterList(encounter_id);
+                    swal('The campaign was added!')
+                })
+                .catch(function (error) {
+                    self.message = "Something has gone terribly wrong!"
+                })
+        }
+    }
+
+    // GET Encounter list
+    self.getEncounterList = function (encounter, campaign_id) {
+        $http.get(`/api/encounter`)
+            .then(function (response) {
+                self.encounterList.list = response.data;
+            })
+            .catch(function (error) {
+                self.message = "Something has gone terribly wrong!"
+            })
+    }
+
+    // POST Create Encounter
+    self.addEncounter = function (encounter, campaign_id) {
+        if (encounter.encounter_name === '' || encounter.campaign_id === '') {
+            self.message = "Enter a encounter name and select a Campaign!"
+        } else {
+            $http.post('/api/encounter', encounter)
+                .then(function (response) {
+                    self.showAddCampaign = false;
+                    self.getEncounterList(campaign_id);
+                    swal('The campaign was added!')
+                })
+                .catch(function (error) {
+                    self.message = "Something has gone terribly wrong!"
+                })
+        }
+    }
 }])
