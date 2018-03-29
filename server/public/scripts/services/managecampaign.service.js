@@ -28,10 +28,17 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     self.showAddEncounter = false;
 
     // GET Campaign list
-    self.getCampaigns = function (id) {
-        $http.get(`/api/campaign/users/${id}`)
+    self.getCampaignList = function (dm_id) {
+        console.log(dm_id);
+        const id = dm_id.user_id;
+        console.log(id);
+        
+        $http.get(`/campaign/users/${id}`)
             .then(function (response) {
+                
                 self.campaignList.list = response.data;
+                console.log(self.campaignList);
+                
             })
             .catch(function (error) {
                 self.message = "Something has gone terribly wrong!"
@@ -40,10 +47,12 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
 
     // POST Create Campaign
     self.addCampaign = function (campaign, user_id) {
+        console.log(campaign, user_id);
+        
         if (campaign.campaign_name === '' || campaign.campaign_notes === '') {
             self.message = "Enter a campaign name and a description!"
         } else {
-            $http.post('/api/campaign', campaign)
+            $http.post('/campaign', campaign)
                 .then(function (response) {
                     self.showAddCampaign = false;
                     self.getCampaignList(user_id);
@@ -129,7 +138,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
         } else {
             $http.post('/api/encounter', encounter)
                 .then(function (response) {
-                    self.showAddCampaign = false;
+                    self.showAddEncounter = false;
                     self.getEncounterList(campaign_id);
                     swal('The campaign was added!')
                 })

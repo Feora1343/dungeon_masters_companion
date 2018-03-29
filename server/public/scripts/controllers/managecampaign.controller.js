@@ -3,9 +3,8 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
     var self = this;
 
     // CampaignService variables
-    self.campaignList = {
-        list: []
-    }
+    self.campaignList = [];
+
     self.characterList = {
         list: []
     }
@@ -19,6 +18,19 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
     // UserService variables
     self.userService = UserService;
     self.userObject = UserService.userObject;
+
+    // CampaignService variables
+	self.campaignService = CampaignService;
+	self.campaignList = CampaignService.campaignList;
+    self.message = CampaignService.message;
+    self.characterList = CampaignService.characterList;
+    self.monsterList = CampaignService.monsterList;
+    self.encounterList = CampaignService.encounterList;
+    self.campaign_id = CampaignService.campaign_id;
+    self.showAddCampaign = false;
+    self.showAddCharacter = false;
+    self.showAddMonster = false;
+    self.showAddEncounter = false;
 
     // Campaign object 
     self.campaign = {
@@ -51,11 +63,15 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
     };
 
     // CAMPAIGN: CampaignService to get the list of campaigns
-    self.getCampaignList = function (campaign_id) {
-        CampaignService.getCampaignList(self.userObject.id);
+    self.getCampaignList = function () {
+        CampaignService.getCampaignList(self.campaign, self.userObject.id);
     }
 
+    console.log(self.campaignList);
+    
+
     // CAMPAIGN: Run the getCampaignList function
+    console.log(self.userObject);
     self.getCampaignList(self.userObject.id);
 
 
@@ -64,16 +80,18 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
 
     // CAMPAIGN: CampaignSerivce to add a campaign
     self.addCampaign = function (campaign, user_id) {
-        CampaignService.addCampaign(campaign, self.userObject.id);
+        console.log(campaign);
+        
+        CampaignService.addCampaign(self.campaign, self.userObject.id);
     }
 
     // CHARACTER: CampaignService to get the list of characters
     self.getCharacterList = function (character_id) {
-        CampaignService.getCharacterList(campaign_id);
+        CampaignService.getCharacterList(self.character.chracter_id, self.campaign.campaign_id);
     }
 
     // CHARACTER: Run the getCharacterList function
-    self.getCharacterList(campaign_id);
+    self.getCharacterList(self.campaign_id);
 
 
     // CHARACTER: Get the characterList variable
@@ -81,16 +99,16 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
 
     // CHARACTER: CampaignSerivce to add a character
     self.addCharacter = function (character, campaign_id) {
-        CampaignService.addCharacter(character, campaign_id);
+        CampaignService.addCharacter(self.character, self.campaign.campaign_id);
     }
 
     // MONSTER: CampaignService to get the list of monsters
     self.getMonsterList = function (monster_id) {
-        CampaignService.getMonsterList(encounter_id);
+        CampaignService.getMonsterList(self.monster, self.encounter.encounter_id);
     }
 
     // MONSTER: Run the getMonsterList function
-    self.getMonsterList(monster_id);
+    self.getMonsterList(self.monster.monster_id);
 
 
     // MONSTER: Get the monsterList variable
@@ -98,16 +116,16 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
 
     // MONSTER: CampaignSerivce to add a monster
     self.addMonster = function (monster) {
-        CampaignService.addMonster(monster);
+        CampaignService.addMonster(self.monster);
     }
 
     // ENCOUNTER: CampaignService to get the list of encounters
     self.getEncounterList = function (encounter_id) {
-        CampaignService.getEncounterList(campaign_id);
+        CampaignService.getEncounterList(self.encounter.campaign_id);
     }
 
     // ENCOUNTER: Run the getEncounterList function
-    self.getEncounterList(campaign_id);
+    self.getEncounterList(self.encounter.campaign_id);
 
 
     // ENCOUNTER: Get the encounterList variable
@@ -115,6 +133,6 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
 
     // ENCOUNTER: CampaignSerivce to add a encounter
     self.addEncounter = function (encounter, encounter_id) {
-        CampaignService.addEncounter(encounter, campaign_id);
+        CampaignService.addEncounter(self.encounter, self.encounter.campaign_id);
     }
 }])

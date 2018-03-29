@@ -7,33 +7,37 @@ const router = express.Router();
 
 // POST campaign to the database
 router.post('/', (req, res) => {
+  
   if (req.isAuthenticated()) {
     const campaign_name = req.body.campaign_name;
     const campaign_notes = req.body.campaign_notes;
     const user_id = req.body.user_id;
+    console.log(campaign_name);
 
     var saveCampaign = {
       campaign_name: campaign_name,
       campaign_notes: campaign_notes,
       user_id: user_id
     }
+    console.log(saveCampaign);
+    
 
-    const queryText = 'INSERT INTO campaign (campaign_name, campaign_notes, user_id) VALUES ($1, $2, $3';
-    pool.query(queryText, [saveCampaign.campaign_name, saveCampaign.campaign_notes, saveCampaign.user_id], (err, result) => {
-      if (err) {
-        console.log('Error inserting data into campaign', err);
-        res.sendStatus(500);
-      } else {
+    const queryText = `INSERT INTO campaign (campaign_name, campaign_notes, user_id) VALUES ($1, $2, $3)`;
+    pool.query(queryText, [saveCampaign.campaign_name, saveCampaign.campaign_notes, saveCampaign.user_id])
+      .then((result) => {
         res.sendStatus(201);
-      }
-    })
-  } else {
+      })
+      .catch((error) => {
+        res.sendStatus(500);
+      })
+    }
+   else {
     res.sendStatus(403);
   }
 })
 
 // POST character to the database
-router.post('/', (req, res) => {
+router.post('/character', (req, res) => {
   if (req.isAuthenticated()) {
     const character_name = req.body.character_name;
     const character_icon = req.body.character_icon;
@@ -60,7 +64,7 @@ router.post('/', (req, res) => {
 })
 
 // POST monster to the database
-router.post('/', (req, res) => {
+router.post('/monster', (req, res) => {
   if (req.isAuthenticated()) {
     const monster_name = req.body.monster_name;
     const monster_icon = req.body.monster_icon;
@@ -85,7 +89,7 @@ router.post('/', (req, res) => {
 })
 
 // POST encounter to the database
-router.post('/', (req, res) => {
+router.post('/encounter', (req, res) => {
   if (req.isAuthenticated()) {
     const encounter_name = req.body.encounter_name;
     const campaign_id = req.body.campaign_id;
@@ -112,14 +116,15 @@ router.post('/', (req, res) => {
 // GET campaign based on user:id
 router.get('/users/:id', (req, res) => {
   if (req.isAuthenticated()) {
-    const queryText = 'SELECT campaign_id, campaign.campaign_name, campaign.campaign_notes FROM campaign JOIN users ON users.id = campaign.user_id WHERE campaign.user_id=$1';
-    pool.query(queryText, [req.params.id], (err, result) => {
-      if (err) {
+    const id = req.params.id;
+    const queryText = `SELECT campaign.campaign_id, campaign.campaign_name, campaign.campaign_notes FROM campaign WHERE campaign.user_id=${id}`;
+    pool.query(queryText)
+      .then(function (result) {
+        res.send(result.rows);
+      })
+      .catch(function (result) {
         res.sendStatus(500);
-      } else {
-        res.send(results.row);
-      }
-    })
+      })
   } else {
     res.sendStatus(403);
   }

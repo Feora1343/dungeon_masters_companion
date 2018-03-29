@@ -14,18 +14,18 @@
         <div class="md-dialog-content">
           <md-card>
             <md-content style="width:800px;" class="md-padding" ng-controller="CampaignServiceController as cc">
-                <form ng-submit="cc.createCampaign()">
+                <form>
                     <md-input-container class="md-icon-float md-block">
                         <md-icon style="position: absolute;" aria-label="Campaign Name" md-font-icon="mi mi-person"></md-icon>
-                        <input flex-gt-xs="50" ng-model="cc.campaign.name" type="campaign name" placeholder="Campaign Name" ng-required="true">
+                        <input flex-gt-xs="50" ng-model="cc.campaign.campaign_name" type="campaign name" placeholder="Campaign Name" ng-required="true">
                     </md-input-container>
                     <md-input-container class="md-icon-float md-block">
                         <md-icon style="position: absolute;" aria-label="Campaign Notes" md-font-icon="mi mi-note-add"></md-icon>
-                        <input flex-gt-xs="50" ng-model="cc.campaign.notes" type="campaign notes" placeholder="Campaign Notes" ng-required="false">
+                        <input flex-gt-xs="50" ng-model="cc.campaign.campaign_notes" type="campaign notes" placeholder="Campaign Notes" ng-required="false">
                     </md-input-container>
                     <div layout="row" flex>
                         <span flex></span>
-                        <md-button class="md-raised md-primary" type="submit" name="submit" value="Create Campaign">Create Campaign</md-button>
+                        <md-button ng-click="cc.addCampaign(cc.campaign, cc.user_id)" class="md-raised md-primary" type="submit" name="submit" value="Create Campaign">Create Campaign</md-button>
                     </div>
                 </form>
             </md-content>
