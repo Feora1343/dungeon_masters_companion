@@ -32,10 +32,10 @@
                                                 </md-card>
                                                 <md-card ng-controller="CampaignServiceController as cc">
                                                     <md-select  flex placeholder="Select Campaign" ng-model="campaign" md-on-open="loadCampaign()" style="width: 300px;">
-                                                        <md-option value="campaign" ng-repeat="campaign in cc.campaignList.list">{{campaign.campaign_name}}</md-option>
+                                                        <md-option ng-value="campaign" ng-repeat="campaign in cc.campaignList.list">{{campaign.campaign_name}}</md-option>
                                                     </md-select>
                                                       
-                                                    <h3 center style="text-align:center;vertical-align: middle;line-height: 30px;">Campaign {{ campaign ? campaign.name : 'Not' }} Loaded!</h3>
+                                                    <h3 center style="text-align:center;vertical-align: middle;line-height: 30px;" value="campaign.campaign_name" >Campaign {{ campaign ? campaign.campaign_name : 'Not' }} Loaded!</h3>
                                                 </md-card>
                                             </div>
                                             <div layout="row" id="labels">
