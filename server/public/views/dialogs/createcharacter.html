@@ -13,19 +13,19 @@
         <md-dialog-content class="md-padding" layout="row">
             <div class="md-dialog-content">
                 <md-card>
-                    <md-content style="width:800px;" class="md-padding" ng-controller="ManageCampaign as mc">
-                        <form ng-submit="mc.createCharacter()">
+                    <md-content style="width:800px;" class="md-padding" ng-controller="CampaignServiceController as cc">
+                        <form>
                             <md-input-container class="md-icon-float md-block">
                                 <md-icon style="position: absolute;" aria-label="Character Name" md-font-icon="mi mi-person"></md-icon>
-                                <input flex-gt-xs="50" ng-model="mc.character.name" type="character name" placeholder="Character Name" ng-required="true">
+                                <input flex-gt-xs="50" ng-model="cc.character.character_name" type="character name" placeholder="Character Name" ng-required="true">
                             </md-input-container>
                             <md-input-container class="md-icon-float md-block">
                                 <md-icon style="position: absolute;" aria-label="Character Class" md-font-icon="mi mi-photo"></md-icon>
-                                <md-select flex-gt-xs="50" placeholder="Select Character Class" ng-model="mc.classes">
+                                <md-select flex-gt-xs="50" placeholder="Select Character Class" ng-model="cc.character.character_icon" ng-required="true">
                                     <md-select-label>
                                         <img ng-src="{{ classes.image }}" />
                                     </md-select-label>
-                                    <md-option ng-repeat="class in classes track by $index" ng-value="class.value">
+                                    <md-option ng-repeat="class in classes track by $index" ng-value="class.image">
                                         <div layout="row">
                                             <img style="zoom:50%;" ng-src="{{class.image}}" />
                                             <p style="font-size:75%;padding:0px 5px;">{{class.value}}</p>
@@ -35,13 +35,13 @@
                             </md-input-container>
                             <md-input-container class="md-icon-float md-block">
                                 <md-icon style="position: absolute;" aria-label="Select Campaign" md-font-icon="mi mi-person"></md-icon>
-                                <md-select flex-gt-xs="50" placeholder="Select Campaign" ng-model="campaign" md-on-open="loadCampaign()">
-                                    <md-option ng-value="campaign" ng-repeat="campaign_name in campaigns">{{campaign.campaign_name}}</md-option>
+                                <md-select flex-gt-xs="50" placeholder="Select Campaign" ng-model="cc.campaign" md-on-open="loadCampaign()" ng-required="true">
+                                    <md-option ng-value="campaign" ng-repeat="campaign in cc.campaignList.list">{{campaign.campaign_name}}</md-option>
                                 </md-select>
                             </md-input-container>
                             <div layout="row" flex>
                                 <span flex></span>
-                                <md-button class="md-raised md-primary" type="submit" name="submit" value="Create Character">Create Character</md-button>
+                                <md-button ng-click="cc.addCharacter(cc.character, cc.campaign)" class="md-raised md-primary" type="submit" name="submit" value="Create Character">Create Character</md-button>
                             </div>
                         </form>
                     </md-content>

@@ -32,13 +32,13 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
         console.log(dm_id);
         const id = dm_id.user_id;
         console.log(id);
-        
+
         $http.get(`/campaign/users/${id}`)
             .then(function (response) {
-                
+
                 self.campaignList.list = response.data;
                 console.log(self.campaignList);
-                
+
             })
             .catch(function (error) {
                 self.message = "Something has gone terribly wrong!"
@@ -48,7 +48,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     // POST Create Campaign
     self.addCampaign = function (campaign, user_id) {
         console.log(campaign, user_id);
-        
+
         if (campaign.campaign_name === '' || campaign.campaign_notes === '') {
             self.message = "Enter a campaign name and a description!"
         } else {
@@ -56,17 +56,22 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
                 .then(function (response) {
                     self.showAddCampaign = false;
                     self.getCampaignList(user_id);
-                    swal('The campaign was added!')
-                })
-                .catch(function (error) {
-                    self.message = "Something has gone terribly wrong!"
+                    swal({
+                            title: "The Campaign Was Added!",
+                            icon: "../images/sweetalerts/addcampaign.png"
+                        }).then(function () {
+                            location.reload();
+                        })
+                        .catch(function (error) {
+                            self.message = "Something has gone terribly wrong!"
+                        })
                 })
         }
     }
 
     // GET Character list
     self.getCharacterList = function (campaign_id) {
-        $http.get('/api/character')
+        $http.get('/character')
             .then(function (response) {
                 self.characterList.list = response.data;
             })
@@ -77,14 +82,28 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
 
     // POST Create Character
     self.addCharacter = function (character, campaign_id) {
-        if (character.campaign_name === '' || character.character_icon === '') {
+        console.log(character, campaign_id);
+        let new_character = {
+            character_name: character.character_name,
+            character_icon: character.character_icon,
+            campaign_id: campaign_id
+        }
+        console.log(new_character);
+
+
+        if (character.character_name === '' || character.character_icon === '') {
             self.message = "Enter a character name and a description!"
         } else {
-            $http.post('/api/character', character)
+            $http.post('/campaign/character', new_character)
                 .then(function (response) {
                     self.showAddCharacter = false;
                     self.getCharacterList(campaign_id);
-                    swal('The campaign was added!')
+                    swal({
+                        title: "The Character Was Added!",
+                        icon: "../images/sweetalerts/addcharacter.png"
+                    }).then(function () {
+                        location.reload();
+                    })
                 })
                 .catch(function (error) {
                     self.message = "Something has gone terribly wrong!"
@@ -94,7 +113,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
 
     // GET Monster list
     self.getMonsterList = function (id) {
-        $http.get('/api/monster')
+        $http.get('/monster')
             .then(function (response) {
                 self.monsterList.list = response.data;
             })
@@ -104,15 +123,27 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     }
 
     // POST Monster Character
-    self.addMonster = function (monster, encounter_id) {
+    self.addMonster = function (monster) {
+        console.log(monster);
+        let new_monster = {
+            monster_name: monster.monster_name,
+            monster_icon: monster.monster_icon,
+        }
+        console.log(new_monster);
+
         if (monster.monster_name === '' || monster.monster_icon === '') {
-            self.message = "Enter a character name and a description!"
+            self.message = "Enter a monster name and select monster icon!"
         } else {
-            $http.post('/api/monster', monster)
+            $http.post('/campaign/monster', new_monster)
                 .then(function (response) {
                     self.showAddMonster = false;
-                    self.getMonsterList(encounter_id);
-                    swal('The campaign was added!')
+                    self.getMonsterList(monster_id);
+                    swal({
+                        title: "The Monster Was Added!",
+                        icon: "../images/sweetalerts/addmonster.png"
+                    }).then(function () {
+                        location.reload();
+                    })
                 })
                 .catch(function (error) {
                     self.message = "Something has gone terribly wrong!"
@@ -122,7 +153,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
 
     // GET Encounter list
     self.getEncounterList = function (encounter, campaign_id) {
-        $http.get(`/api/encounter`)
+        $http.get(`/encounter`)
             .then(function (response) {
                 self.encounterList.list = response.data;
             })
@@ -136,15 +167,21 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
         if (encounter.encounter_name === '' || encounter.campaign_id === '') {
             self.message = "Enter a encounter name and select a Campaign!"
         } else {
-            $http.post('/api/encounter', encounter)
+            $http.post('/encounter', encounter)
                 .then(function (response) {
                     self.showAddEncounter = false;
                     self.getEncounterList(campaign_id);
-                    swal('The campaign was added!')
+                    swal({
+                        title: "The Encounter Was Added!",
+                        icon: "../images/sweetalerts/addencounter.png"
+                    }).then(function () {
+                        location.reload();
+                    })
                 })
                 .catch(function (error) {
                     self.message = "Something has gone terribly wrong!"
                 })
         }
     }
+
 }])

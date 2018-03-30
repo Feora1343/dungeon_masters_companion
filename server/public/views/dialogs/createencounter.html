@@ -13,22 +13,22 @@
         <md-dialog-content class="md-padding" layout="row">
             <div class="md-dialog-content">
                 <md-card>
-                    <md-content style="width:800px;" class="md-padding" ng-controller="ManageCampaign as mc">
-                        <form ng-submit="mc.createCharacter()">
-                            <md-select style="float:left;" flex-gt-xs="50" placeholder="Select Campaign" ng-model="campaign" md-on-open="loadCampaign()">
-                                <md-option ng-value="campaign" ng-repeat="campaign_name in campaigns">{{campaign.campaign_name}}</md-option>
+                    <md-content style="width:800px;" class="md-padding" ng-controller="CampaignServiceController as cc">
+                        <form>
+                            <md-select style="float:left;" flex-gt-xs="50" placeholder="Select Campaign" ng-model="cc.campaign" md-on-open="loadCampaign()" ng-required="true">
+                                <md-option ng-value="campaign" ng-repeat="campaign in cc.campaignList.list">{{campaign.campaign_name}}</md-option>
                             </md-select>
                             <md-title>
                                 <h3 flex-gt-xs="50" style="margin:0;text-align:center;vertical-align: middle;line-height: 30px;">Campaign {{ campaign ? campaign.name : 'Not' }} Loaded!</h3>
                             </md-title>
                             <md-input-container class="md-icon-float md-block">
                                 <md-icon style="position: absolute;" aria-label="Encounter Name" md-font-icon="mi mi-person"></md-icon>
-                                <input ng-model="mc.encounter.name" type="encounter name" placeholder="Encounter Name" ng-required="true">
+                                <input ng-model="cc.encounter.encounter_name" type="encounter name" placeholder="Encounter Name" ng-required="true">
                             </md-input-container>
                             <div layout-gt-sm="row">
                                 <md-input-container class="md-icon-float md-block" flex-gt-xs="50">
                                     <md-icon style="position: absolute;" aria-label="Characters" md-font-icon="mi mi-add-a-photo"></md-icon>
-                                    <md-select placeholder="Select Characters" ng-model="mc.classes" md-on-close="clearSearchTerm" data-md-container-class="characterSelectHeader"
+                                    <md-select placeholder="Select Characters" ng-model="cc.character.character_name" md-on-close="clearSearchTerm" data-md-container-class="characterSelectHeader"
                                         multiple>
                                         <md-select-header class="select-header">
                                             <input aria-label="Search" ng-model="searchTerm" type="search" class="header-searchbox">
@@ -81,7 +81,7 @@
                             </div>
                             <div layout="row" flex>
                                 <span flex></span>
-                                <md-button class="md-raised md-primary" type="submit" name="submit" value="Create Encounter">Create Encounter</md-button>
+                                <md-button ng-click="cc.addEncounter(cc.encounter, cc.campaign)" class="md-raised md-primary" type="submit" name="submit" value="Create Encounter">Create Encounter</md-button>
                             </div>
                         </form>
                     </md-content>

@@ -7,7 +7,6 @@ const router = express.Router();
 
 // POST campaign to the database
 router.post('/', (req, res) => {
-  
   if (req.isAuthenticated()) {
     const campaign_name = req.body.campaign_name;
     const campaign_notes = req.body.campaign_notes;
@@ -20,7 +19,6 @@ router.post('/', (req, res) => {
       user_id: user_id
     }
     console.log(saveCampaign);
-    
 
     const queryText = `INSERT INTO campaign (campaign_name, campaign_notes, user_id) VALUES ($1, $2, $3)`;
     pool.query(queryText, [saveCampaign.campaign_name, saveCampaign.campaign_notes, saveCampaign.user_id])
@@ -30,18 +28,20 @@ router.post('/', (req, res) => {
       .catch((error) => {
         res.sendStatus(500);
       })
-    }
-   else {
+  } else {
     res.sendStatus(403);
   }
 })
 
 // POST character to the database
 router.post('/character', (req, res) => {
+  console.log(req.body);
+
   if (req.isAuthenticated()) {
     const character_name = req.body.character_name;
     const character_icon = req.body.character_icon;
     const campaign_id = req.body.campaign_id;
+    console.log(character_name);
 
     var saveCharacter = {
       character_name: character_name,
@@ -49,15 +49,16 @@ router.post('/character', (req, res) => {
       campaign_id: campaign_id
     }
 
-    const queryText = 'INSERT INTO character (character_name, character_notes, campaign_id) VALUES ($1, $2, $3';
-    pool.query(queryText, [saveCharacter.character_name, saveCharacter.character_notes, saveCharacter.campaign_id], (err, result) => {
-      if (err) {
-        console.log('Error inserting data into character', err);
-        res.sendStatus(500);
-      } else {
+    console.log(saveCharacter);
+
+    const queryText = `INSERT INTO character (character_name, character_icon, campaign_id) VALUES ($1, $2, $3)`;
+    pool.query(queryText, [saveCharacter.character_name, saveCharacter.character_icon, saveCharacter.campaign_id])
+      .then((result) => {
         res.sendStatus(201);
-      }
-    })
+      })
+      .catch((error) => {
+        res.sendStatus(500);
+      })
   } else {
     res.sendStatus(403);
   }
@@ -65,24 +66,27 @@ router.post('/character', (req, res) => {
 
 // POST monster to the database
 router.post('/monster', (req, res) => {
+  console.log(req.body);
+
   if (req.isAuthenticated()) {
     const monster_name = req.body.monster_name;
     const monster_icon = req.body.monster_icon;
 
     var saveMonster = {
       monster_name: monster_name,
-      monster_icon: monster_icon,
+      monster_icon: monster_icon
     }
 
-    const queryText = 'INSERT INTO monster (monster_name, monster_notes) VALUES ($1, $2';
-    pool.query(queryText, [saveMonster.monster_name, saveMonster.monster_notes], (err, result) => {
-      if (err) {
-        console.log('Error inserting data into monster', err);
-        res.sendStatus(500);
-      } else {
+    console.log(saveMonster);
+
+    const queryText = `INSERT INTO monster (monster_name, monster_icon) VALUES ($1, $2)`;
+    pool.query(queryText, [saveMonster.monster_name, saveMonster.monster_icon])
+      .then((result) => {
         res.sendStatus(201);
-      }
-    })
+      })
+      .catch((error) => {
+        res.sendStatus(500);
+      })
   } else {
     res.sendStatus(403);
   }

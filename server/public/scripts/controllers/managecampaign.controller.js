@@ -1,4 +1,4 @@
-myApp.controller('CampaignServiceController', ['$http', 'UserService', 'CampaignService', function ($http, UserService, CampaignService) {
+myApp.controller('CampaignServiceController', ['$http', 'UserService', 'CampaignService', '$scope', function ($http, UserService, CampaignService, $scope) {
     console.log('CampaignServiceController created');
     var self = this;
 
@@ -62,6 +62,164 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
         campaign_id: ''
     };
 
+    // Character Icon List
+    $scope.classes = [{
+        value: 'Male Barbarian',
+        image: './images/characters/barbarian_male_alive.gif'
+      },
+      {
+        value: 'Female Barbarian',
+        image: './images/characters/barbarian_female_alive.gif'
+      },
+      {
+        value: 'Male Bard',
+        image: './images/characters/bard_male_alive.gif'
+      },
+      {
+        value: 'Female Bard',
+        image: './images/characters/bard_female_alive.gif'
+      },
+      {
+        value: 'Male Cleric',
+        image: './images/characters/cleric_male_alive.gif'
+      },
+      {
+        value: 'Female Cleric',
+        image: './images/characters/cleric_female_alive.gif'
+      },
+      {
+        value: 'Male Druid',
+        image: './images/characters/druid_male_alive.gif'
+      },
+      {
+        value: 'Female Druid',
+        image: './images/characters/druid_female_alive.gif'
+      },
+      {
+        value: 'Male Fighter',
+        image: './images/characters/fighter_male_alive.gif'
+      },
+      {
+        value: 'Female Fighter',
+        image: './images/characters/fighter_female_alive.gif'
+      },
+      {
+        value: 'Male Monk',
+        image: './images/characters/monk_male_alive.gif'
+      },
+      {
+        value: 'Female Monk',
+        image: './images/characters/monk_female_alive.gif'
+      },
+      {
+        value: 'Male Paladin',
+        image: './images/characters/paladin_male_alive.gif'
+      },
+      {
+        value: 'Female Paladin',
+        image: './images/characters/paladin_female_alive.gif'
+      },
+      {
+        value: 'Male Ranger',
+        image: './images/characters/ranger_male_alive.gif'
+      },
+      {
+        value: 'Female Ranger',
+        image: './images/characters/ranger_female_alive.gif'
+      },
+      {
+        value: 'Male Rogue',
+        image: './images/characters/rogue_male_alive.gif'
+      },
+      {
+        value: 'Female Rogue',
+        image: './images/characters/rogue_female_alive.gif'
+      },
+      {
+        value: 'Male Sorcerer',
+        image: './images/characters/sorcerer_male_alive.gif'
+      },
+      {
+        value: 'Female Sorcerer',
+        image: './images/characters/sorcerer_female_alive.gif'
+      },
+      {
+        value: 'Male Warlock',
+        image: './images/characters/warlock_male_alive.gif'
+      },
+      {
+        value: 'Female Warlock',
+        image: './images/characters/warlock_female_alive.gif'
+      },
+      {
+        value: 'Male Wizard',
+        image: './images/characters/wizard_male_alive.gif'
+      },
+      {
+        value: 'Female Wizard',
+        image: './images/characters/wizard_female_alive.gif'
+      }
+    ];
+
+    $scope.monsters = [{
+        value: 'Abberation',
+        image: './images/monsters/aberration.jpg'
+      },
+      {
+        value: 'Beast',
+        image: './images/monsters/beast.jpg'
+      },
+      {
+        value: 'Celestial',
+        image: './images/monsters/celestial.jpg'
+      },
+      {
+        value: 'Construct',
+        image: './images/monsters/construct.jpg'
+      },
+      {
+        value: 'Dragon',
+        image: './images/monsters/dragon.jpg'
+      },
+      {
+        value: 'Elemental',
+        image: './images/monsters/elemental.jpg'
+      },
+      {
+        value: 'Fey',
+        image: './images/monsters/fey.jpg'
+      },
+      {
+        value: 'Fiend',
+        image: './images/monsters/fiend.jpg'
+      },
+      {
+        value: 'Giant',
+        image: './images/monsters/giant.jpg'
+      },
+      {
+        value: 'Humanoid',
+        image: './images/monsters/humanoid.jpg'
+      },
+      {
+        value: 'Monstrosity',
+        image: './images/monsters/monstrosity.jpg'
+      },
+      {
+        value: 'Ooze',
+        image: './images/monsters/ooze.jpg'
+      },
+      {
+        value: 'Plant',
+        image: './images/monsters/plant.jpg'
+      },
+      {
+        value: 'Undead',
+        image: './images/monsters/undead.jpg'
+      },
+    ];
+
+
     // CAMPAIGN: CampaignService to get the list of campaigns
     self.getCampaignList = function () {
         CampaignService.getCampaignList(self.campaign, self.userObject.id);
@@ -98,8 +256,10 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
     self.characterList = CampaignService.characterList;
 
     // CHARACTER: CampaignSerivce to add a character
-    self.addCharacter = function (character, campaign_id) {
-        CampaignService.addCharacter(self.character, self.campaign.campaign_id);
+    self.addCharacter = function (character, campaign) {
+        console.log(character, campaign.campaign_id);
+        
+        CampaignService.addCharacter(character, campaign.campaign_id);
     }
 
     // MONSTER: CampaignService to get the list of monsters
