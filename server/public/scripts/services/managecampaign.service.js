@@ -22,9 +22,6 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
         list: []
     }
 
-    self.character = {
-        list: []
-    }
     self.showAddCampaign = false;
     self.showAddCharacter = false;
     self.showAddMonster = false;
@@ -81,7 +78,6 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
             .then(function (response) {
                 self.characterList.list = response.data;
                 console.log(self.characterList.list);
-                self.character = self.characterList.list;
                 
                 
             })

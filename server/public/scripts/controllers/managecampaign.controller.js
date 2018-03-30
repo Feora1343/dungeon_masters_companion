@@ -27,7 +27,6 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
   self.monsterList = CampaignService.monsterList;
   self.encounterList = CampaignService.encounterList;
   self.campaign_id = CampaignService.campaign_id;
-  self.character = CampaignService.character;
   self.showAddCampaign = false;
   self.showAddCharacter = false;
   self.showAddMonster = false;
@@ -223,10 +222,10 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
   $scope.onChange = function() {
     console.log(self.campaignList.list);
     self.getCampaignId(self.campaignList.list);
-    
-    alert('on change');
-    console.log(self.character);
-    
+    swal({
+      title: "The Campaign Is Loaded!",
+      icon: "../images/sweetalerts/loadcampaign.png"
+  })
 };
 
 self.getCampaignId = function(campaign) {
@@ -241,8 +240,6 @@ self.getCampaignId = function(campaign) {
     CampaignService.getCampaignList(self.campaign);
   }
 
-  console.log(self.campaignList);
-
 
   // CAMPAIGN: Run the getCampaignList function
   console.log(self.userObject);
@@ -254,8 +251,6 @@ self.getCampaignId = function(campaign) {
 
   // CAMPAIGN: CampaignSerivce to add a campaign
   self.addCampaign = function (campaign, user_id) {
-    console.log(campaign);
-
     CampaignService.addCampaign(self.campaign, self.userObject.id);
   }
 

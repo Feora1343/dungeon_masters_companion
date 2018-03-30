@@ -6,11 +6,13 @@
             <md-icon md-font-icon="mi mi-power-settings-new"></md-icon>
         </md-button>
     </div>
+    
     <div ng-cloak="" class="UserForm" flex>
         <div class="wrapper">
             <md-content class="md-padding layout-row">
                 <div flex-xs flex-gt-xs="50" layout="row" ng-include="'/views/dmc/tools.html'">
                 </div>
+
                 <div flex-xs flex-gt-xs="50" layout="row">
                     <md-card style="opacity: 0.8;height:600px">
                         <div id="dmcDialog">
@@ -39,7 +41,7 @@
                                                 </md-card>
                                             </div>
                                             <div layout="row" id="labels">
-                                                <md-card style="width:175px">
+                                                <md-card style="width:175px" ng-controller="CampaignServiceController as cc">
                                                     <md-title>
                                                         <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Campaign Notes</h4>
                                                     </md-title>
@@ -49,16 +51,16 @@
                                                     <span>{{campaign.campaign_notes}}</span>
                                         </md-content>
                                         </md-card>
-                                        <md-card style="width:175px">
+                                        <md-card style="width:175px" ng-controller="CampaignServiceController as cc">
                                             <md-title>
                                                 <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Characters</h4>
                                             </md-title>
                                             <md-content>
                                                 <hr />
-                                                <span ng-repeat="character in cc.character">{{character.character_name}}</span>
+                                                <span ng-repeat="character in cc.characterList.list">{{character.character_name}}</span>
                                             </md-content>
                                         </md-card>
-                                        <md-card style="width:175px">
+                                        <md-card style="width:175px" ng-controller="CampaignServiceController as cc">
                                             <md-title>
                                                 <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Encounters</h4>
                                             </md-title>

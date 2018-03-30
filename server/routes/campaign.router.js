@@ -140,8 +140,10 @@ router.get('/users/:id', (req, res) => {
 router.get('/character/:id', (req, res) => {
   if (req.isAuthenticated()) {
     const id = req.params.id;
-    const queryText = `SELECT character.character_id, character_name, character_icon, campaign_id FROM character WHERE character.campaign_id=${id}`;
-    pool.query(queryText)
+    console.log(id);
+    
+    const queryText = `SELECT character.character_id, character_name, character_icon, campaign_id FROM character WHERE character.campaign_id=$1`;
+    pool.query(queryText, [id])
       .then((result) => {
         res.send(result.rows);
       })
