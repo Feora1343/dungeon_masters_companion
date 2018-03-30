@@ -31,8 +31,8 @@
                                                         value="Create Encounter">Create Encounter</md-button>
                                                 </md-card>
                                                 <md-card ng-controller="CampaignServiceController as cc">
-                                                    <md-select  flex placeholder="Select Campaign" ng-model="campaign" md-on-open="loadCampaign()" style="width: 300px;">
-                                                        <md-option ng-value="campaign" ng-repeat="campaign in cc.campaignList.list">{{campaign.campaign_name}}</md-option>
+                                                    <md-select  flex placeholder="Select Campaign" ng-model="campaign" ng-change="onChange()" style="width: 300px;">
+                                                        <md-option ng-value="campaign" ng-repeat="campaign in cc.campaignList.list" ng-model="cc.campaignList.list">{{campaign.campaign_name}}</md-option>
                                                     </md-select>
                                                       
                                                     <h3 center style="text-align:center;vertical-align: middle;line-height: 30px;" value="campaign.campaign_name" >Campaign {{ campaign ? campaign.campaign_name : 'Not' }} Loaded!</h3>
@@ -55,6 +55,7 @@
                                             </md-title>
                                             <md-content>
                                                 <hr />
+                                                <span ng-repeat="character in cc.character">{{character.character_name}}</span>
                                             </md-content>
                                         </md-card>
                                         <md-card style="width:175px">

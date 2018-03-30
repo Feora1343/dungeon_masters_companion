@@ -137,9 +137,10 @@ router.get('/users/:id', (req, res) => {
 
 
 // GET characters based on campaign_id
-router.get('/character', (req, res) => {
+router.get('/character/:id', (req, res) => {
   if (req.isAuthenticated()) {
-    const queryText = 'SELECT character.character_id, character_name, character_icon, campaign_id FROM character JOIN campaign ON campaign.campaign_id WHERE campaign.campaign_id=$1';
+    const id = req.params.id;
+    const queryText = `SELECT character.character_id, character_name, character_icon, campaign_id FROM character WHERE character.campaign_id=${id}`;
     pool.query(queryText)
       .then((result) => {
         res.send(result.rows);

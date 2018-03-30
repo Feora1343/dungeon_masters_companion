@@ -136,23 +136,6 @@ const myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAria', 'ngMes
       $scope.answer = function (answer) {
         $mdDialog.hide(answer);
       };
-
-      $scope.characterList = [`{{campaign.campaign_id.character.character_name}}`];
-      $scope.searchTerm;
-      $scope.clearSearchTerm = function() {
-        $scope.searchTerm = '';
-      };
-
-      $scope.monsterList = [`{{campaign.campaign_id.monster.monster_name}}`];
-      $scope.searchTerm;
-      $scope.clearSearchTerm = function() {
-        $scope.searchTerm = '';
-      };
-
-      $element.find('input').on('keydown', function(ev) {
-          ev.stopPropagation();
-      });
-
     }
   })
 

@@ -22,6 +22,9 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
         list: []
     }
 
+    self.character = {
+        list: []
+    }
     self.showAddCampaign = false;
     self.showAddCharacter = false;
     self.showAddMonster = false;
@@ -70,10 +73,17 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     }
 
     // GET Character list
-    self.getCharacterList = function (campaign_id) {
-        $http.get('/character')
+    self.getCharacterList = function (id) {
+        console.log(id);
+        
+        
+        $http.get(`/campaign/character/${id}`)
             .then(function (response) {
                 self.characterList.list = response.data;
+                console.log(self.characterList.list);
+                self.character = self.characterList.list;
+                
+                
             })
             .catch(function (error) {
                 self.message = "Something has gone terribly wrong!"
@@ -97,6 +107,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
             $http.post('/campaign/character', new_character)
                 .then(function (response) {
                     self.showAddCharacter = false;
+                    
                     self.getCharacterList(campaign_id);
                     swal({
                         title: "The Character Was Added!",
@@ -113,7 +124,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
 
     // GET Monster list
     self.getMonsterList = function (id) {
-        $http.get('/monster')
+        $http.get('/campaign/monster')
             .then(function (response) {
                 self.monsterList.list = response.data;
             })
@@ -136,8 +147,9 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
         } else {
             $http.post('/campaign/monster', new_monster)
                 .then(function (response) {
+                    
                     self.showAddMonster = false;
-                    self.getMonsterList(monster_id);
+                    self.getMonsterList();
                     swal({
                         title: "The Monster Was Added!",
                         icon: "../images/sweetalerts/addmonster.png"
@@ -153,7 +165,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
 
     // GET Encounter list
     self.getEncounterList = function (encounter, campaign_id) {
-        $http.get(`/encounter`)
+        $http.get(`/campaign/encounter`)
             .then(function (response) {
                 self.encounterList.list = response.data;
             })
