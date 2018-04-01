@@ -72,14 +72,14 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     // GET Character list
     self.getCharacterList = function (id) {
         console.log(id);
-        
-        
+
+
         $http.get(`/campaign/character/${id}`)
             .then(function (response) {
                 self.characterList.list = response.data;
                 console.log(self.characterList.list);
-                
-                
+
+
             })
             .catch(function (error) {
                 self.message = "Something has gone terribly wrong!"
@@ -103,7 +103,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
             $http.post('/campaign/character', new_character)
                 .then(function (response) {
                     self.showAddCharacter = false;
-                    
+
                     self.getCharacterList(campaign_id);
                     swal({
                         title: "The Character Was Added!",
@@ -143,7 +143,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
         } else {
             $http.post('/campaign/monster', new_monster)
                 .then(function (response) {
-                    
+
                     self.showAddMonster = false;
                     self.getMonsterList();
                     swal({
@@ -192,4 +192,65 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
         }
     }
 
+    // DELETE Delete Character
+    self.deleteCharacter = function (character, campaign_id) {
+        swal({
+                text: "Are you sure you want to delete this character?",
+                icon: "warning",
+                buttons: ["Not Yet", "Yes, Delete."],
+                dangerMode: true,
+                closeOnClickOutside: false
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    const character_id = id;
+                    $http.delete(`/campaign/character/${id}`)
+                        .then(function (response) {
+                            swal({
+                                title: "The character has been removed!",
+                                icon: "../images/sweetalerts/deletecharacter.png"
+                            }).then(function () {
+                                location.reload();
+                            })
+                        })
+                        .catch(function (error) {
+                            console.log('error, response:', error);
+                            self.message = "Something has gone terribly wrong!"
+                        });
+                } else {
+                    swal('The character will not be removed.');
+                }
+            });
+
+    };
+
+    // DELETE Delete Encounter
+    self.deleteEncounter = function (encounter, campaign_id) {
+            swal({
+                    text: "Are you sure you want to delete this encounter?",
+                    icon: "warning",
+                    buttons: ["Not Yet", "Yes, Delete."],
+                    dangerMode: true,
+                    closeOnClickOutside: false
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        const encounter_id = id;
+                        $http.delete(`/encounter/${id}`)
+                            .then(function (response) {
+                                swal({
+                                    title: "The encounterhas been removed!",
+                                    icon: "../images/sweetalerts/deleteencounter.png"
+                                });
+                                self.getEncounterList(encounter_id);
+                            })
+                            .catch(function (error) {
+                                console.log('error, response:', response);
+                                self.message = "Something has gone terribly wrong!"
+                            });
+                    } else {
+                        swal('The encounter will not be removed.');
+                    }
+                });
+        }
 }])

@@ -6,7 +6,7 @@
             <md-icon md-font-icon="mi mi-power-settings-new"></md-icon>
         </md-button>
     </div>
-    
+
     <div ng-cloak="" class="UserForm" flex>
         <div class="wrapper">
             <md-content class="md-padding layout-row">
@@ -33,42 +33,39 @@
                                                         value="Create Encounter">Create Encounter</md-button>
                                                 </md-card>
                                                 <md-card ng-controller="CampaignServiceController as cc">
-                                                    <md-select  flex placeholder="Select Campaign" ng-model="campaign" ng-change="onChange()" style="width: 300px;">
+                                                    <md-select flex placeholder="Select Campaign" ng-model="campaign" ng-change="onChange()" style="width: 300px;">
                                                         <md-option ng-value="campaign" ng-repeat="campaign in cc.campaignList.list" ng-model="cc.campaignList.list">{{campaign.campaign_name}}</md-option>
                                                     </md-select>
-                                                      
-                                                    <h3 center style="text-align:center;vertical-align: middle;line-height: 30px;" value="campaign.campaign_name" >Campaign {{ campaign ? campaign.campaign_name : 'Not' }} Loaded!</h3>
+
+                                                    <h3 center style="text-align:center;vertical-align: middle;line-height: 30px;" value="campaign.campaign_notes">Campaign Notes
+                                                        <hr />{{ campaign.campaign_notes }}</h3>
                                                 </md-card>
                                             </div>
                                             <div layout="row" id="labels">
-                                                <md-card style="width:175px" ng-controller="CampaignServiceController as cc">
+
+                                                <md-card style="width:245px;max-height:325px;" ng-controller="CampaignServiceController as cc">
                                                     <md-title>
-                                                        <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Campaign Notes</h4>
+                                                        <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Characters</h4>
+                                                        <hr />
+                                                    </md-title>
+                                                    <md-content>
+                                                        <ul>
+                                                            <li ng-repeat="character in cc.characterList.list" style="vertical-align:middle;">
+                                                                <img style="zoom:75%;padding:10px;vertical-align:middle;" ng-src="{{character.character_icon}}"/>{{character.character_name}}<md-button ng-click="cc.deleteCharacter(cc.character.character_id, cc.character.campaign_id)" style="float:right;margin: 10px 0px 0px 0px;" class="md-fab md-mini" aria-label="Delete Character"><md-icon md-font-icon="mi mi-delete"></md-icon></md-button>
+                                                            </li>
+                                                        </ul>
+                                                    </md-content> 
+                                                    </md-card>
+                                                    
+                                                <md-card style="width:245px;max-height:325px;" ng-controller="CampaignServiceController as cc">
+                                                    <md-title>
+                                                        <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Encounters</h4>
                                                     </md-title>
                                                     <md-content>
                                                         <hr />
                                                     </md-content>
-                                                    <span>{{campaign.campaign_notes}}</span>
-                                        </md-content>
-                                        </md-card>
-                                        <md-card style="width:175px" ng-controller="CampaignServiceController as cc">
-                                            <md-title>
-                                                <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Characters</h4>
-                                            </md-title>
-                                            <md-content>
-                                                <hr />
-                                                <span ng-repeat="character in cc.characterList.list">{{character.character_name}}</span>
-                                            </md-content>
-                                        </md-card>
-                                        <md-card style="width:175px" ng-controller="CampaignServiceController as cc">
-                                            <md-title>
-                                                <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Encounters</h4>
-                                            </md-title>
-                                            <md-content>
-                                                <hr />
-                                            </md-content>
-                                        </md-card>
-                                        </div>
+                                                </md-card>
+                                            </div>
                                     </md-tab>
 
                                     <!-- <md-tab label="Manage Characters">
@@ -132,7 +129,7 @@
                         </div>
                     </md-card>
                 </div>
-            </md-content>
+                </md-content>
         </div>
     </div>
 </div>

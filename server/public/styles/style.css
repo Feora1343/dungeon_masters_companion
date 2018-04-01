@@ -74,17 +74,15 @@ main {
 }
 
 ul {
-  list-style-type: square;
-  display: block;
-  margin: 0;
-  padding: 0;
+  list-style-type: none;
+  padding: 5px;
 }
 
 li {
-  float: left;
+  padding: 5px;
 }
 
-li a {
+/* li a {
   display: block;
   color: white;
   text-align: center;
@@ -95,7 +93,7 @@ li a {
 li a:hover {
   text-decoration: underline;
   color: #eee;
-}
+} */
 
 .fabToolbardemoBasicUsage md-fab-toolbar.md-right md-fab-trigger.align-with-text {
   left: 7px;

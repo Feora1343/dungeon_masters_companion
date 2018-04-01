@@ -2,11 +2,13 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
   console.log('CampaignServiceController created');
   var self = this;
 
-  // CampaignService variables
+  // CampaignService variable storage
   self.campaignList = [];
 
+  self.campaignNotes = [];
+
   self.characterList = [];
-  
+
   self.monsterList = {
     list: []
   }
@@ -21,6 +23,7 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
   // CampaignService variables
   self.campaignService = CampaignService;
   self.campaignList = CampaignService.campaignList;
+  self.getCampaignNotes = CampaignService.getCampaignNotes;
   self.message = CampaignService.message;
   self.characterList = CampaignService.characterList;
   self.getCharacterList = CampaignService.getCharacterList;
@@ -31,7 +34,7 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
   self.showAddCharacter = false;
   self.showAddMonster = false;
   self.showAddEncounter = false;
-    
+
   // Campaign object 
   self.campaign = {
     campaign_id: '',
@@ -219,21 +222,21 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
     },
   ];
 
-  $scope.onChange = function() {
+  $scope.onChange = function () {
     console.log(self.campaignList.list);
     self.getCampaignId(self.campaignList.list);
     swal({
       title: "The Campaign Is Loaded!",
       icon: "../images/sweetalerts/loadcampaign.png"
-  })
-};
+    })
+  };
 
-self.getCampaignId = function(campaign) {
-  console.log(campaign);
-  id = campaign[0].campaign_id;
-  console.log(id);
-  self.getCharacterList(id);
-}
+  self.getCampaignId = function (campaign) {
+    console.log(campaign);
+    id = campaign[0].campaign_id;
+    console.log(id);
+    self.getCharacterList(id);
+  }
 
   // CAMPAIGN: CampaignService to get the list of campaigns
   self.getCampaignList = function () {
@@ -254,17 +257,7 @@ self.getCampaignId = function(campaign) {
     CampaignService.addCampaign(self.campaign, self.userObject.id);
   }
 
-  // CHARACTER: CampaignService to get the list of characters
-  // self.getCharacterList = function () {
-  //   CampaignService.getCharacterList();
-    
-  // }
-
-  // CHARACTER: Run the getCharacterList function
-  // self.getCharacterList();
-
-
-  // // CHARACTER: Get the characterList variable
+  // CHARACTER: Get the characterList variable
   self.characterList = CampaignService.characterList;
 
   // CHARACTER: CampaignSerivce to add a character
@@ -272,6 +265,11 @@ self.getCampaignId = function(campaign) {
     console.log(character, campaign.campaign_id);
 
     CampaignService.addCharacter(character, campaign.campaign_id);
+  }
+
+  // CHARACTER: CampaignService to delete a character
+  self.deleteCharacter = function (character, campaign) {
+    CampaignService.deleteCharacter(character, campaign.campaign_id);
   }
 
   // MONSTER: CampaignService to get the list of monsters
@@ -307,4 +305,10 @@ self.getCampaignId = function(campaign) {
   self.addEncounter = function (encounter, encounter_id) {
     CampaignService.addEncounter(self.encounter, self.encounter.campaign_id);
   }
+
+  // ENCOUNTER: CampaignService to delete an encounter
+  self.deleteEncounter = function (encounter, campaign) {
+    CampaignService.deleteEncounter(encounter, campaign.campaign_id);
+  }
+
 }])

@@ -103,7 +103,7 @@ router.post('/encounter', (req, res) => {
       campaign_id: campaign_id
     }
 
-    const queryText = 'INSERT INTO encounter (encounter_name, campaign_id) VALUES ($1, $2';
+    const queryText = 'INSERT INTO encounter (encounter_name, campaign_id) VALUES ($1, $2)';
     pool.query(queryText, [saveEncounter.encounter_name, saveEncounter.campaign_id], (err, result) => {
       if (err) {
         console.log('Error inserting data into encounter', err);
@@ -134,14 +134,12 @@ router.get('/users/:id', (req, res) => {
   }
 })
 
-
-
 // GET characters based on campaign_id
 router.get('/character/:id', (req, res) => {
   if (req.isAuthenticated()) {
     const id = req.params.id;
     console.log(id);
-    
+
     const queryText = `SELECT character.character_id, character_name, character_icon, campaign_id FROM character WHERE character.campaign_id=$1`;
     pool.query(queryText, [id])
       .then((result) => {
@@ -155,11 +153,12 @@ router.get('/character/:id', (req, res) => {
   }
 })
 
-// GET monsters based on campaign_id
+// GET monsters based on encounter
 router.get('/monster', (req, res) => {
   if (req.isAuthenticated()) {
-    const queryText = 'SELECT monster.monster_id, monster_name, monster_icon FROM monster JOIN encounter_monster ON encounter_monster.monster_id WHERE encounter_monster.monster_id=$1';
-    pool.query(queryText)
+    const id = req.params.id;
+    const queryText = `SELECT monster.monster_id, monster_name, monster_icon FROM monster WHERE monster.monster_id=$1`;
+    pool.query(queryText, [id])
       .then((result) => {
         res.send(result.rows);
       })
@@ -174,8 +173,9 @@ router.get('/monster', (req, res) => {
 // GET encounters based on campaign_id
 router.get('/encounter', (req, res) => {
   if (req.isAuthenticated()) {
-    const queryText = 'SELECT encounter.encounter_id, encounter_name, campaign_id FROM encounter JOIN campaign ON campaign.campaign_id WHERE campaign_id.campaign_id=$1';
-    pool.query(queryText)
+    const id = req.params.id;
+    const queryText = `SELECT encounter.encounter_id, encounter_name, campaign_id FROM  encounter WHERE encounter.campaign_id=$1`;
+    pool.query(queryText, [id])
       .then((result) => {
         res.send(result.rows);
       })
@@ -187,21 +187,63 @@ router.get('/encounter', (req, res) => {
   }
 })
 
-// // DELETE campaign from campaign table - Not yet implemented
-// router.delete('/:id', function (req, res) {
-//   if (req.isAuthenticated()) {
-//     const queryText = 'DELETE FROM campaign WHERE id=$1';
-//     pool.query(queryText, [req.params.id])
-//       .then((result) => {
-//         res.sendStatus(200);
-//       })
-//       .catch((err) => {
-//         res.sendStatus(500);
-//       })
-//   } else {
-//     res.sendStatus(403);
-//   }
-// }
-// )
+// DELETE campaign from campaign table
+router.delete('/:id', function (req, res) {
+  if (req.isAuthenticated()) {
+    const id = req.params.id;
+    const queryText = `DELETE FROM campaign WHERE id=$1`;
+    pool.query(queryText, [id])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      })
+  } else {
+    res.sendStatus(403);
+  }
+})
+
+// DELETE character from character list based on campaign id
+router.delete('/character/:id', function (req, res) {
+  if (req.isAuthenticated()) {
+    const id = req.params.id;
+    const queryEncounterCharacter = `DELETE FROM encounter_character WHERE character_id=$1;`;
+    const queryCharacter = `DELETE FROM character WHERE character_id=$1`;
+    pool.query(queryEncounterCharacter, [id])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      })
+      pool.query(queryCharacter, [id])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      })
+  } else {
+    res.sendStatus(403);
+  }
+})
+
+// DELETE encounterfrom character list based on campaign id
+router.delete('/encounter/:id', function (req, res) {
+  if (req.isAuthenticated()) {
+    const id = req.params.id;
+    const queryText = `DELETE FROM encounter WHERE id=$1`;
+    pool.query(queryText, [id])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      })
+  } else {
+    res.sendStatus(403);
+  }
+})
 
 module.exports = router;
