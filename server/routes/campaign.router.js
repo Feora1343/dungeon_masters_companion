@@ -121,6 +121,7 @@ router.post('/encounter', (req, res) => {
 router.get('/users/:id', (req, res) => {
   if (req.isAuthenticated()) {
     const id = req.params.id;
+    
     const queryText = `SELECT campaign.campaign_id, campaign.campaign_name, campaign.campaign_notes FROM campaign WHERE campaign.user_id=${id}`;
     pool.query(queryText)
       .then(function (result) {
@@ -208,14 +209,18 @@ router.delete('/:id', function (req, res) {
 router.delete('/character/:id', function (req, res) {
   if (req.isAuthenticated()) {
     const id = req.params.id;
+    console.log(id);
     const queryEncounterCharacter = `DELETE FROM encounter_character WHERE character_id=$1;`;
     const queryCharacter = `DELETE FROM character WHERE character_id=$1`;
+    
     pool.query(queryEncounterCharacter, [id])
       .then((result) => {
-        res.sendStatus(200);
+        console.log(result);
+        
       })
       .catch((err) => {
-        res.sendStatus(500);
+        console.log(err);
+        
       })
       pool.query(queryCharacter, [id])
       .then((result) => {

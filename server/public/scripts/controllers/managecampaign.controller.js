@@ -243,7 +243,6 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
     CampaignService.getCampaignList(self.campaign);
   }
 
-
   // CAMPAIGN: Run the getCampaignList function
   console.log(self.userObject);
   self.getCampaignList(self.userObject.id);
@@ -267,9 +266,10 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
     CampaignService.addCharacter(character, campaign.campaign_id);
   }
 
-  // CHARACTER: CampaignService to delete a character
-  self.deleteCharacter = function (character, campaign) {
-    CampaignService.deleteCharacter(character, campaign.campaign_id);
+  // CHARACTER: CampaignService to delete a character  
+  self.deleteCharacter = function (character, character_id) {
+    console.log(character);
+    CampaignService.deleteCharacter(character, character.character_id);
   }
 
   // MONSTER: CampaignService to get the list of monsters

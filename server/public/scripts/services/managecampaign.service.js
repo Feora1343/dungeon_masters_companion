@@ -193,7 +193,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     }
 
     // DELETE Delete Character
-    self.deleteCharacter = function (character, campaign_id) {
+    self.deleteCharacter = function (character, character_id) {
         swal({
                 text: "Are you sure you want to delete this character?",
                 icon: "warning",
@@ -201,10 +201,9 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
                 dangerMode: true,
                 closeOnClickOutside: false
             })
-            .then((willDelete) => {
+            .then(function(willDelete) {
                 if (willDelete) {
-                    const character_id = id;
-                    $http.delete(`/campaign/character/${id}`)
+                    $http.delete(`/campaign/character/${character_id}`)
                         .then(function (response) {
                             swal({
                                 title: "The character has been removed!",
