@@ -1,17 +1,14 @@
-myApp.controller('CampaignServiceController', ['$http', 'UserService', 'CampaignService', '$scope', function ($http, UserService, CampaignService, $scope) {
+myApp.controller('CampaignServiceController', ['$http', 'UserService', 'CampaignService', '$scope', '$element', function ($http, UserService, CampaignService, $scope, $element) {
   console.log('CampaignServiceController created');
   var self = this;
 
   // CampaignService variable storage
   self.campaignList = [];
 
-  self.campaignNotes = [];
-
   self.characterList = [];
 
-  self.monsterList = {
-    list: []
-  }
+  self.monsterList = [];
+
   self.encounterList = {
     list: []
   }
@@ -27,6 +24,7 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
   self.message = CampaignService.message;
   self.characterList = CampaignService.characterList;
   self.getCharacterList = CampaignService.getCharacterList;
+  self.getMonsterList = CampaignService.getMonsterList;
   self.monsterList = CampaignService.monsterList;
   self.encounterList = CampaignService.encounterList;
   self.campaign_id = CampaignService.campaign_id;
@@ -55,7 +53,8 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
   self.monster = {
     monster_id: '',
     monster_name: '',
-    monster_icon: ''
+    monster_icon: '',
+    campaign_id: ''
   };
 
   // Encounter object 
@@ -236,6 +235,7 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
     id = campaign[0].campaign_id;
     console.log(id);
     self.getCharacterList(id);
+    self.getMonsterList(id);
   }
 
   // CAMPAIGN: CampaignService to get the list of campaigns
@@ -261,8 +261,6 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
 
   // CHARACTER: CampaignSerivce to add a character
   self.addCharacter = function (character, campaign) {
-    console.log(character, campaign.campaign_id);
-
     CampaignService.addCharacter(character, campaign.campaign_id);
   }
 
@@ -272,21 +270,18 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
     CampaignService.deleteCharacter(character, character.character_id);
   }
 
-  // MONSTER: CampaignService to get the list of monsters
-  self.getMonsterList = function (monster_id) {
-    CampaignService.getMonsterList(self.monster, self.encounter.encounter_id);
-  }
-
-  // MONSTER: Run the getMonsterList function
-  self.getMonsterList(self.monster.monster_id);
-
-
   // MONSTER: Get the monsterList variable
   self.monsterList = CampaignService.monsterList;
 
   // MONSTER: CampaignSerivce to add a monster
-  self.addMonster = function (monster) {
-    CampaignService.addMonster(self.monster);
+  self.addMonster = function (monster, campaign) {
+    CampaignService.addMonster(monster, campaign.campaign_id);
+  }
+
+  // MONSTER: CampaignService to delete a monster 
+  self.deleteMonster = function (monster, monster_id) {
+    console.log(monster);
+    CampaignService.deleteMonster(monster, monster.monster_id);
   }
 
   // ENCOUNTER: CampaignService to get the list of encounters

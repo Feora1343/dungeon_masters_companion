@@ -103,8 +103,24 @@ router.post('/encounter', (req, res) => {
       campaign_id: campaign_id
     }
 
+    const monster_name = req.body.monster_name;
+    const monster_icon = req.body.monster_icon;
+
+    var saveMonster = {
+      monster_name: monster_name,
+      monster_icon: monster_icon
+    }
+
+    const character_name = req.body.character_name;
+    const character_icon = req.body.character_icon;
+
+    var saveEncounterCharacter = {
+      character_id: character_id,
+      encounter_id: encounter_id,
+    }
+
     const queryText = 'INSERT INTO encounter (encounter_name, campaign_id) VALUES ($1, $2)';
-    pool.query(queryText, [saveEncounter.encounter_name, saveEncounter.campaign_id], (err, result) => {
+    pool.query(queryText, [saveEncounterCharacter.encounter_name, saveEncounterCharacter.campaign_id], (err, result) => {
       if (err) {
         console.log('Error inserting data into encounter', err);
         res.sendStatus(500);
@@ -112,16 +128,39 @@ router.post('/encounter', (req, res) => {
         res.sendStatus(201);
       }
     })
-  } else {
-    res.sendStatus(403);
+
+    for (var character of characterList.List) {
+      const queryText = 'INSERT INTO encounter_character (character_id, encounter_id) VALUES ($1, $2)';
+      pool.query(queryText, [saveEncounter.encounter_name, saveEncounter.campaign_id], (err, result) => {
+        if (err) {
+          console.log('Error inserting data into encounter', err);
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(403);
+        }
+      })
+    }
+
+    for (var monster of monsterList.List) {
+      const queryText = 'INSERT INTO encounter_monster (monster_id, encounter_id) VALUES ($1, $2)';
+      pool.query(queryText, [saveEncounter.encounter_name, saveEncounter.campaign_id], (err, result) => {
+        if (err) {
+          console.log('Error inserting data into encounter', err);
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(403);
+        }
+      })
+    }
   }
 })
+
 
 // GET campaign based on user:id
 router.get('/users/:id', (req, res) => {
   if (req.isAuthenticated()) {
     const id = req.params.id;
-    
+
     const queryText = `SELECT campaign.campaign_id, campaign.campaign_name, campaign.campaign_notes FROM campaign WHERE campaign.user_id=${id}`;
     pool.query(queryText)
       .then(function (result) {
@@ -154,11 +193,11 @@ router.get('/character/:id', (req, res) => {
   }
 })
 
-// GET monsters based on encounter
-router.get('/monster', (req, res) => {
+// GET monsters based on campaign_id
+router.get('/monster/:id', (req, res) => {
   if (req.isAuthenticated()) {
     const id = req.params.id;
-    const queryText = `SELECT monster.monster_id, monster_name, monster_icon FROM monster WHERE monster.monster_id=$1`;
+    const queryText = `SELECT monster.monster_id, monster_name, monster_icon, campaign_id FROM monster WHERE monster.campaign_id=$1`;
     pool.query(queryText, [id])
       .then((result) => {
         res.send(result.rows);
@@ -212,17 +251,46 @@ router.delete('/character/:id', function (req, res) {
     console.log(id);
     const queryEncounterCharacter = `DELETE FROM encounter_character WHERE character_id=$1;`;
     const queryCharacter = `DELETE FROM character WHERE character_id=$1`;
-    
+
     pool.query(queryEncounterCharacter, [id])
       .then((result) => {
         console.log(result);
-        
+
       })
       .catch((err) => {
         console.log(err);
-        
+
       })
-      pool.query(queryCharacter, [id])
+    pool.query(queryCharacter, [id])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      })
+  } else {
+    res.sendStatus(403);
+  }
+})
+
+// DELETE character from character list based on campaign id
+router.delete('/monster/:id', function (req, res) {
+  if (req.isAuthenticated()) {
+    const id = req.params.id;
+    console.log(id);
+    const queryEncounterMonster = `DELETE FROM encounter_monster WHERE monster_id=$1;`;
+    const queryMonster = `DELETE FROM monster WHERE monster_id=$1`;
+
+    pool.query(queryEncounterMonster, [id])
+      .then((result) => {
+        console.log(result);
+
+      })
+      .catch((err) => {
+        console.log(err);
+
+      })
+    pool.query(queryMonster, [id])
       .then((result) => {
         res.sendStatus(200);
       })

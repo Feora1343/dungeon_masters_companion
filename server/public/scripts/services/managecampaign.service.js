@@ -72,14 +72,10 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     // GET Character list
     self.getCharacterList = function (id) {
         console.log(id);
-
-
         $http.get(`/campaign/character/${id}`)
             .then(function (response) {
                 self.characterList.list = response.data;
                 console.log(self.characterList.list);
-
-
             })
             .catch(function (error) {
                 self.message = "Something has gone terribly wrong!"
@@ -120,9 +116,11 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
 
     // GET Monster list
     self.getMonsterList = function (id) {
-        $http.get('/campaign/monster')
+        $http.get(`/campaign/monster/${id}`)
             .then(function (response) {
                 self.monsterList.list = response.data;
+                console.log(self.monsterList.list);
+                
             })
             .catch(function (error) {
                 self.message = "Something has gone terribly wrong!"
@@ -135,6 +133,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
         let new_monster = {
             monster_name: monster.monster_name,
             monster_icon: monster.monster_icon,
+            campaign_id: campaign_id
         }
         console.log(new_monster);
 
@@ -145,7 +144,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
                 .then(function (response) {
 
                     self.showAddMonster = false;
-                    self.getMonsterList();
+                    self.getMonsterList(campaign_id);
                     swal({
                         title: "The Monster Was Added!",
                         icon: "../images/sweetalerts/addmonster.png"
@@ -196,7 +195,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     self.deleteCharacter = function (character, character_id) {
         swal({
                 text: "Are you sure you want to delete this character?",
-                icon: "warning",
+                icon: "../images/sweetalerts/deletecharacterwarning.png",
                 buttons: ["Not Yet", "Yes, Delete."],
                 dangerMode: true,
                 closeOnClickOutside: false
@@ -218,6 +217,37 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
                         });
                 } else {
                     swal('The character will not be removed.');
+                }
+            });
+
+    };
+
+    // DELETE Delete Monster
+    self.deleteMonster = function (monster, monster_id) {
+        swal({
+                text: "Are you sure you want to delete this monster?",
+                icon: "../images/sweetalerts/deletemonsterwarning.png",
+                buttons: ["Not Yet", "Yes, Delete."],
+                dangerMode: true,
+                closeOnClickOutside: false
+            })
+            .then(function(willDelete) {
+                if (willDelete) {
+                    $http.delete(`/campaign/monster/${monster_id}`)
+                        .then(function (response) {
+                            swal({
+                                title: "The monster has been removed!",
+                                icon: "../images/sweetalerts/deletemonster.png"
+                            }).then(function () {
+                                location.reload();
+                            })
+                        })
+                        .catch(function (error) {
+                            console.log('error, response:', error);
+                            self.message = "Something has gone terribly wrong!"
+                        });
+                } else {
+                    swal('The monster will not be removed.');
                 }
             });
 

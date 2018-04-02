@@ -23,7 +23,7 @@
                                     <md-icon style="position: absolute;" aria-label="Monster Class" md-font-icon="mi mi-photo"></md-icon>
                                     <md-select flex-gt-xs="50" placeholder="Select Monster Class" ng-model="cc.monster.monster_icon">
                                         <md-select-label>
-                                            <img ng-src="{{ monsters.image }}" />
+                                            <img ng-src="{{ monster.image }}" />
                                         </md-select-label>
                                         <md-option ng-repeat="monster in monsters track by $index" ng-value="monster.image">
                                             <div layout="row">

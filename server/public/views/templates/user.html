@@ -51,60 +51,37 @@
                                                     <md-content>
                                                         <ul>
                                                             <li ng-repeat="character in cc.characterList.list" style="vertical-align:middle;">
-                                                                <img style="zoom:75%;padding:10px;vertical-align:middle;" ng-src="{{character.character_icon}}"/>{{character.character_name}}<md-button ng-click="cc.deleteCharacter(character)" style="float:right;margin: 10px 0px 0px 0px;" class="md-fab md-mini" aria-label="Delete Character"><md-icon md-font-icon="mi mi-delete"></md-icon></md-button>
+                                                                <img style="zoom:75%;padding:10px;vertical-align:middle;" ng-src="{{character.character_icon}}" />{{character.character_name}}
+                                                                <md-button ng-click="cc.deleteCharacter(character)"
+                                                                    style="float:right;margin: 10px 0px 0px 0px;" class="md-fab md-mini"
+                                                                    aria-label="Delete Character">
+                                                                    <md-icon md-font-icon="mi mi-delete"></md-icon>
+                                                                </md-button>
                                                             </li>
                                                         </ul>
-                                                    </md-content> 
-                                                    </md-card>
-                                                    
+                                                    </md-content>
+                                                </md-card>
+
                                                 <md-card style="width:245px;max-height:325px;" ng-controller="CampaignServiceController as cc">
                                                     <md-title>
-                                                        <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Encounters</h4>
+                                                        <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Monsters</h4>
+                                                        <hr />
                                                     </md-title>
                                                     <md-content>
-                                                        <hr />
+                                                        <ul>
+                                                            <li ng-repeat="monster in cc.monsterList.list" style="vertical-align:middle;">
+                                                                <img style="zoom:20%;padding:10px;vertical-align:middle;" ng-src="{{monster.monster_icon}}" />{{monster.monster_name}}
+                                                                <md-button ng-click="cc.deleteMonster(monster)"
+                                                                    style="float:right;margin: 10px 0px 0px 0px;" class="md-fab md-mini"
+                                                                    aria-label="Delete Monster">
+                                                                    <md-icon md-font-icon="mi mi-delete"></md-icon>
+                                                                </md-button>
+                                                            </li>
+                                                        </ul>
                                                     </md-content>
                                                 </md-card>
                                             </div>
                                     </md-tab>
-
-                                    <!-- <md-tab label="Manage Characters">
-                                        <md-content class="md-padding" ng-controller="RegisterController as rc">
-                                            <form ng-submit="rc.registerUser()">
-                                                <md-input-container class="md-icon-float md-block">
-                                                    <md-icon style="position: absolute;" aria-label="Username" md-font-icon="mi mi-person"></md-icon>
-                                                    <input ng-model="rc.user.username" type="username" placeholder="Username" ng-required="true">
-                                                </md-input-container>
-                                                <md-input-container class="md-icon-float md-block">
-                                                    <md-icon style="position: absolute;" aria-label="Password" md-font-icon="mi mi-lock"></md-icon>
-                                                    <input ng-model="rc.user.password" type="password" placeholder="Password" ng-required="true">
-                                                </md-input-container>
-                                                <div layout="row" flex>
-                                                    <span flex></span>
-                                                    <md-button class="md-raised md-primary" type="submit" name="submit" value="Register">Register</md-button>
-                                                </div>
-                                            </form>
-                                        </md-content>
-                                    </md-tab>
-
-                                    <md-tab label="Manage Encounters">
-                                        <md-content class="md-padding" ng-controller="RegisterController as rc">
-                                            <form ng-submit="rc.registerUser()">
-                                                <md-input-container class="md-icon-float md-block">
-                                                    <md-icon style="position: absolute;" aria-label="Username" md-font-icon="mi mi-person"></md-icon>
-                                                    <input ng-model="rc.user.username" type="username" placeholder="Username" ng-required="true">
-                                                </md-input-container>
-                                                <md-input-container class="md-icon-float md-block">
-                                                    <md-icon style="position: absolute;" aria-label="Password" md-font-icon="mi mi-lock"></md-icon>
-                                                    <input ng-model="rc.user.password" type="password" placeholder="Password" ng-required="true">
-                                                </md-input-container>
-                                                <div layout="row" flex>
-                                                    <span flex></span>
-                                                    <md-button class="md-raised md-primary" type="submit" name="submit" value="Register">Register</md-button>
-                                                </div>
-                                            </form>
-                                        </md-content>
-                                    </md-tab> -->
 
                                     <md-tab label="Initiative Tracker">
                                         <md-content class="md-padding" ng-controller="RegisterController as rc">

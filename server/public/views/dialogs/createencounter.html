@@ -15,52 +15,42 @@
                 <md-card>
                     <md-content style="width:800px;" class="md-padding" ng-controller="CampaignServiceController as cc">
                         <form>
-                            <md-select style="float:left;" flex-gt-xs="50" placeholder="Select Campaign" ng-model="cc.campaign" md-on-open="loadCampaign()" ng-required="true">
+                            <md-select style="float:left;width: 300px;" flex-gt-xs="50" placeholder="Select Campaign" ng-model="cc.campaign" ng-change="onChange()"
+                                ng-required="true">
                                 <md-option ng-value="campaign" ng-repeat="campaign in cc.campaignList.list">{{campaign.campaign_name}}</md-option>
                             </md-select>
-                            <md-title>
-                                <h3 flex-gt-xs="50" style="margin:0;text-align:center;vertical-align: middle;line-height: 30px;">Campaign {{ campaign ? campaign.name : 'Not' }} Loaded!</h3>
-                            </md-title>
+                            <br />
+                            <br />
                             <md-input-container class="md-icon-float md-block">
                                 <md-icon style="position: absolute;" aria-label="Encounter Name" md-font-icon="mi mi-person"></md-icon>
                                 <input ng-model="cc.encounter.encounter_name" type="encounter name" placeholder="Encounter Name" ng-required="true">
                             </md-input-container>
                             <div layout-gt-sm="row">
-                                <md-input-container class="md-icon-float md-block" flex-gt-xs="50">
-                                    <md-icon style="position: absolute;" aria-label="Characters" md-font-icon="mi mi-add-a-photo"></md-icon>
-                                    <md-select placeholder="Select Characters" ng-model="cc.character.character_name" md-on-close="clearSearchTerm" data-md-container-class="characterSelectHeader"
-                                        multiple>
-                                        <md-select-header class="select-header">
-                                            <input aria-label="Search" ng-model="searchTerm" type="search" class="header-searchbox">
-                                        </md-select-header>
+                                <md-input-container flex-gt-xs="50" class="md-icon-float md-block">
+                                    <md-icon style="position: absolute;" aria-label="Characters" md-font-icon="mi mi-photo"></md-icon>
+                                    <md-select placeholder="Select Characters" ng-model="cc.character" ng-required="true">
                                         <md-select-label>
-                                            <img ng-src="{{ classes.image }}" />
+                                            <img ng-src="{{ character.character_icon }}" />
                                         </md-select-label>
-                                        <md-optgroup label="Select Characters">
-                                            <md-option ng-repeat="class in classes track by $index | filter:searchTerm" ng-value="class.value">
-                                                <div layout="row">
-                                                    <img style="zoom:50%;" ng-src="{{class.image}}" />
-                                                    <p style="font-size:75%;padding:0px 5px;">{{class.value}}</p>
-                                                </div>
-                                            </md-option>
-                                        </md-optgroup>
+                                        <md-option ng-repeat="character in cc.characterList.list">
+                                            <div layout="row">
+                                                <img style="zoom:50%;" ng-src="{{character.character_icon}}" />
+                                                <p style="font-size:75%;padding:0px 5px;">{{character.character_name}}</p>
+                                            </div>
+                                        </md-option>
                                     </md-select>
                                 </md-input-container>
+
                                 <md-input-container flex-gt-xs="50" class="md-icon-float md-block">
-                                    <md-icon style="position: absolute;" aria-label="Monsters" md-font-icon="mi mi-add-a-photo"></md-icon>
-                                    <md-select placeholder="Select Monsters" ng-model="mc.monsters" md-on-close="clearSearchTerm" data-md-container-class="characterSelectHeader"
-                                        multiple>
-                                        <md-select-header class="select-header">
-                                            <input aria-label="Search" ng-model="searchTerm" type="search" class="header-searchbox">
-                                        </md-select-header>
+                                    <md-icon style="position: absolute;" aria-label="Monsters" md-font-icon="mi mi-photo"></md-icon>
+                                    <md-select placeholder="Select Monsters" ng-model="cc.monster" ng-required="true">
                                         <md-select-label>
-                                            <img ng-src="{{ monsters.image }}" />
+                                            <img ng-src="{{ monster.monster_icon }}" />
                                         </md-select-label>
-                                        <md-optgroup label="Select Monsters">
-                                            <md-option ng-repeat="monster in monsters track by $index | filter:searchTerm" ng-value="monster.value">
+                                            <md-option ng-repeat="monster in cc.monsterList.list">
                                                 <div layout="row">
-                                                    <img style="zoom:50%;" ng-src="{{monster.image}}" />
-                                                    <p style="font-size:75%;padding:0px 5px;">{{monster.value}}</p>
+                                                    <img style="zoom:20%;" ng-src="{{monster.monster_icon}}" />
+                                                    <p style="font-size:75%;padding:0px 5px;">{{monster.monster_name}}</p>
                                                 </div>
                                             </md-option>
                                         </md-optgroup>
@@ -81,7 +71,8 @@
                             </div>
                             <div layout="row" flex>
                                 <span flex></span>
-                                <md-button ng-click="cc.addEncounter(cc.encounter, cc.campaign)" class="md-raised md-primary" type="submit" name="submit" value="Create Encounter">Create Encounter</md-button>
+                                <md-button ng-click="cc.addEncounter(cc.encounter, cc.campaign)" class="md-raised md-primary" type="submit" name="submit"
+                                    value="Create Encounter">Create Encounter</md-button>
                             </div>
                         </form>
                     </md-content>
