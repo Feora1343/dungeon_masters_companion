@@ -119,6 +119,8 @@ router.post('/monster', (req, res) => {
 // POST encounter to the database
 router.post('/encounter', (req, res) => {
   if (req.isAuthenticated()) {
+    console.log(req.body);
+    
     const encounter_name = req.body.encounter_name;
     const campaign_id = req.body.campaign_id;
     const monsterNameList = req.body.monster;
@@ -133,21 +135,21 @@ router.post('/encounter', (req, res) => {
     // const monster_name = req.body.monster_name;
     // const monster_icon = req.body.monster_icon;
 
-    var saveMonster = {
-      monster_name: monster_name,
-      monster_icon: monster_icon
-    }
+    // var saveMonster = {
+    //   monster_name: monster_name,
+    //   monster_icon: monster_icon
+    // }
 
     // const character_name = req.body.character_name;
     // const character_icon = req.body.character_icon;
 
-    var saveEncounterCharacter = {
-      character_id: character_id,
-      encounter_id: encounter_id
-    }
+    // var saveEncounterCharacter = {
+    //   character_id: character_id,
+    //   encounter_id: encounter_id
+    // }
 
     const queryText = 'INSERT INTO encounter (encounter_name, campaign_id) VALUES ($1, $2)';
-    pool.query(queryText, [saveEncounterCharacter.encounter_name, saveEncounterCharacter.campaign_id], (err, result) => {
+    pool.query(queryText, [encounter_name, campaign_id], (err, result) => {
       if (err) {
         console.log('Error inserting data into encounter', err);
       }
