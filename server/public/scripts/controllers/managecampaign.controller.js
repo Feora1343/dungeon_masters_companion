@@ -296,11 +296,6 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
     CampaignService.deleteMonster(monster, monster.monster_id);
   }
 
-  // // ENCOUNTER: CampaignService to get the list of encounters
-  // self.getEncounterList = function (encounter_id) {
-  //   CampaignService.getEncounterList(self.encounter.campaign_id);
-  // }
-
   // ENCOUNTER: Get the encounterList variable
   self.encounterList = CampaignService.encounterList;
 

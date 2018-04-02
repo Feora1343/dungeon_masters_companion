@@ -181,12 +181,6 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
             self.message = "Enter a encounter name, select a Campaign, select some characters as well as monsters!"
         } else {
 
-            // var postData = {
-            //     encounter: encounter,
-            //     character: character,
-            //     monster: monster
-            // }
-
             $http.post('/campaign/encounter', new_encounter)
                 .then(function (response) {
                     self.showAddEncounter = false;

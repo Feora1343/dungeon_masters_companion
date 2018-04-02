@@ -104,19 +104,18 @@
                                             </div>
                                             <div layout="row" id="labels">
 
-                                                <md-card style="width:245px;max-height:325px;" ng-controller="CampaignServiceController as cc">
+                                                <md-card style="min-width:530px;max-height:325px;" ng-controller="CampaignServiceController as cc">
                                                     <md-title>
-                                                        <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Characters</h4>
+                                                        <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Characters and Monsters<md-button class="md-raised md-primary">Sort Initiative</md-button></h4>
                                                         <hr />
                                                     </md-title>
                                                     <md-content>
                                                         <ul>
                                                             <li ng-repeat="character in cc.characterList.list" style="vertical-align:middle;">
-                                                                <img style="zoom:75%;padding:10px;vertical-align:middle;" ng-src="{{character.character_icon}}" />{{character.character_name}}
-                                                                <md-button ng-click="cc.deleteCharacter(character)" style="float:right;margin: 10px 0px 0px 0px;" class="md-fab md-mini"
-                                                                    aria-label="Delete Character">
-                                                                    <md-icon md-font-icon="mi mi-delete"></md-icon>
-                                                                </md-button>
+                                                                <img style="zoom:75%;padding:10px;vertical-align:middle;" ng-src="{{character.character_icon}}" />{{character.character_name}}<md-input-container style="max-width:50px;vertical-align:middle;padding: 5px 0 0 20px;"><label style="padding: 5px 0 0 20px;">Initiative</label><input type="text"></md-input-container>
+                                                            </li>
+                                                            <li ng-repeat="monster in cc.monsterList.list" style="vertical-align:middle;">
+                                                                <img style="zoom:20%;padding:10px;vertical-align:middle;" ng-src="{{monster.monster_icon}}" />{{monster.monster_name}}<md-input-container style="max-width:50px;vertical-align:middle;padding: 5px 0 0 20px;"><label style="padding: 5px 0 0 20px;">Initiative</label><input type="text"></md-input-container>
                                                             </li>
                                                         </ul>
                                                     </md-content>

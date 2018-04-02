@@ -133,22 +133,6 @@ router.post('/encounter', (req, res) => {
       campaign_id: campaign_id
     }
 
-    // const monster_name = req.body.monster_name;
-    // const monster_icon = req.body.monster_icon;
-
-    // var saveMonster = {
-    //   monster_name: monster_name,
-    //   monster_icon: monster_icon
-    // }
-
-    // const character_name = req.body.character_name;
-    // const character_icon = req.body.character_icon;
-
-    // var saveEncounterCharacter = {
-    //   character_id: character_id,
-    //   encounter_id: encounter_id
-    // }
-
     const queryText = 'INSERT INTO encounter (encounter_name, campaign_id) VALUES ($1, $2)';
     pool.query(queryText, [encounter_name, campaign_id], (err, result) => {
       if (err) {
