@@ -28,6 +28,8 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
   self.monsterList = CampaignService.monsterList;
   self.encounterList = CampaignService.encounterList;
   self.campaign_id = CampaignService.campaign_id;
+  self.character_id = CampaignService.character_id;
+  self.monster_id = CampaignService.monster_id;
   self.showAddCampaign = false;
   self.showAddCharacter = false;
   self.showAddMonster = false;
@@ -303,8 +305,10 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
   self.encounterList = CampaignService.encounterList;
 
   // ENCOUNTER: CampaignSerivce to add a encounter
-  self.addEncounter = function (encounter, campaign) {
-    CampaignService.addEncounter(encounter, campaign.campaign_id);
+  self.addEncounter = function (encounter, campaign, character, monster) {
+    console.log(encounter, campaign, character, monster);
+    
+    CampaignService.addEncounter(encounter, campaign.campaign_id, character.character_id, monster.monster_id);
   }
 
   // ENCOUNTER: CampaignService to delete an encounter

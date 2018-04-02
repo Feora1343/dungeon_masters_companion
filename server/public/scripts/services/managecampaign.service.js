@@ -168,9 +168,11 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     }
 
     // POST Create Encounter
-    self.addEncounter = function (encounter, campaign_id) {
-        if (encounter.encounter_name === '' || encounter.campaign_id === '') {
-            self.message = "Enter a encounter name and select a Campaign!"
+    self.addEncounter = function (encounter, campaign_id, character_id, monster_id) {
+        console.log(encounter, campaign_id, character_id, monster_id);
+        
+        if (encounter.encounter_name === '' || encounter.campaign_id === '' || character.character_id === '' || monster.monster_id === '') {
+            self.message = "Enter a encounter name, select a Campaign, select some characters as well as monsters!"
         } else {
             $http.post('/encounter', encounter)
                 .then(function (response) {
