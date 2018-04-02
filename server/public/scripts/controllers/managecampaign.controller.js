@@ -9,9 +9,7 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
 
   self.monsterList = [];
 
-  self.encounterList = {
-    list: []
-  }
+  self.encounterList = [];
 
   // UserService variables
   self.userService = UserService;
@@ -25,6 +23,8 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
   self.characterList = CampaignService.characterList;
   self.getCharacterList = CampaignService.getCharacterList;
   self.getMonsterList = CampaignService.getMonsterList;
+  self.getEncounterList = CampaignService.getEncounterList;
+  self.encounterList = CampaignService.encounterList;
   self.monsterList = CampaignService.monsterList;
   self.encounterList = CampaignService.encounterList;
   self.campaign_id = CampaignService.campaign_id;
@@ -230,12 +230,22 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
     })
   };
 
+  $scope.onLoad = function () {
+    console.log(self.encounterList.list);
+    self.getCampaignId(self.encounterList.list);
+    swal({
+      title: "The Encounter Is Loaded!",
+      icon: "../images/sweetalerts/loadencounter.png"
+    })
+  };
+
   self.getCampaignId = function (campaign) {
     console.log(campaign);
     id = campaign[0].campaign_id;
     console.log(id);
     self.getCharacterList(id);
     self.getMonsterList(id);
+    self.getEncounterList(id);
   }
 
   // CAMPAIGN: CampaignService to get the list of campaigns
@@ -284,26 +294,22 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
     CampaignService.deleteMonster(monster, monster.monster_id);
   }
 
-  // ENCOUNTER: CampaignService to get the list of encounters
-  self.getEncounterList = function (encounter_id) {
-    CampaignService.getEncounterList(self.encounter.campaign_id);
-  }
-
-  // ENCOUNTER: Run the getEncounterList function
-  self.getEncounterList(self.encounter.campaign_id);
-
+  // // ENCOUNTER: CampaignService to get the list of encounters
+  // self.getEncounterList = function (encounter_id) {
+  //   CampaignService.getEncounterList(self.encounter.campaign_id);
+  // }
 
   // ENCOUNTER: Get the encounterList variable
   self.encounterList = CampaignService.encounterList;
 
   // ENCOUNTER: CampaignSerivce to add a encounter
-  self.addEncounter = function (encounter, encounter_id) {
-    CampaignService.addEncounter(self.encounter, self.encounter.campaign_id);
+  self.addEncounter = function (encounter, campaign) {
+    CampaignService.addEncounter(encounter, campaign.campaign_id);
   }
 
   // ENCOUNTER: CampaignService to delete an encounter
-  self.deleteEncounter = function (encounter, campaign) {
-    CampaignService.deleteEncounter(encounter, campaign.campaign_id);
+  self.deleteEncounter = function (encounter, encounter_id) {
+    CampaignService.deleteEncounter(encounter, encounter.encounter_id);
   }
 
 }])

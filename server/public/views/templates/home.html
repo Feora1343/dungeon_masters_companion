@@ -6,7 +6,7 @@
           <md-tabs flex layout="column" md-stretch-tabs="always" class="loginTabs" md-dynamic-height md-no-ink md-stretch-tabs="auto">
             <md-tabs-wrapper class="tb-wrp md-stretch-tabs">
               
-              <md-tab class="lbl-tabs" label="Login">
+              <md-tab class="login-tab" label="Login">
                 <md-content class="tab-content md-padding" flex>
                   <form ng-submit="lc.login()">
                     <md-input-container class="md-icon-float md-block">
@@ -27,7 +27,7 @@
                 </md-content>
               </md-tab>
 
-              <md-tab label="Sign up">
+              <md-tab class="signup-tab" label="Sign up">
                 <md-content class="md-padding" ng-controller="RegisterController as rc">
                   <form ng-submit="rc.registerUser()">
                     <md-input-container class="md-icon-float md-block">

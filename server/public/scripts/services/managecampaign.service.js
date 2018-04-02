@@ -99,7 +99,6 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
             $http.post('/campaign/character', new_character)
                 .then(function (response) {
                     self.showAddCharacter = false;
-
                     self.getCharacterList(campaign_id);
                     swal({
                         title: "The Character Was Added!",
@@ -128,8 +127,8 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     }
 
     // POST Monster Character
-    self.addMonster = function (monster) {
-        console.log(monster);
+    self.addMonster = function (monster, campaign_id) {
+        console.log(monster, campaign_id);
         let new_monster = {
             monster_name: monster.monster_name,
             monster_icon: monster.monster_icon,
@@ -142,7 +141,6 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
         } else {
             $http.post('/campaign/monster', new_monster)
                 .then(function (response) {
-
                     self.showAddMonster = false;
                     self.getMonsterList(campaign_id);
                     swal({
@@ -159,8 +157,8 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     }
 
     // GET Encounter list
-    self.getEncounterList = function (encounter, campaign_id) {
-        $http.get(`/campaign/encounter`)
+    self.getEncounterList = function (id) {
+        $http.get(`/campaign/encounter/${id}`)
             .then(function (response) {
                 self.encounterList.list = response.data;
             })

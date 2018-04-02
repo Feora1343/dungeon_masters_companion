@@ -71,16 +71,18 @@ router.post('/monster', (req, res) => {
   if (req.isAuthenticated()) {
     const monster_name = req.body.monster_name;
     const monster_icon = req.body.monster_icon;
+    const campaign_id = req.body.campaign_id;
 
     var saveMonster = {
       monster_name: monster_name,
-      monster_icon: monster_icon
+      monster_icon: monster_icon,
+      campaign_id: campaign_id
     }
 
     console.log(saveMonster);
 
-    const queryText = `INSERT INTO monster (monster_name, monster_icon) VALUES ($1, $2)`;
-    pool.query(queryText, [saveMonster.monster_name, saveMonster.monster_icon])
+    const queryText = `INSERT INTO monster (monster_name, monster_icon, campaign_id) VALUES ($1, $2, $3)`;
+    pool.query(queryText, [saveMonster.monster_name, saveMonster.monster_icon, saveMonster.campaign_id])
       .then((result) => {
         res.sendStatus(201);
       })
@@ -197,6 +199,8 @@ router.get('/character/:id', (req, res) => {
 router.get('/monster/:id', (req, res) => {
   if (req.isAuthenticated()) {
     const id = req.params.id;
+    console.log(id);
+    
     const queryText = `SELECT monster.monster_id, monster_name, monster_icon, campaign_id FROM monster WHERE monster.campaign_id=$1`;
     pool.query(queryText, [id])
       .then((result) => {
@@ -211,7 +215,7 @@ router.get('/monster/:id', (req, res) => {
 })
 
 // GET encounters based on campaign_id
-router.get('/encounter', (req, res) => {
+router.get('/encounter/:id', (req, res) => {
   if (req.isAuthenticated()) {
     const id = req.params.id;
     const queryText = `SELECT encounter.encounter_id, encounter_name, campaign_id FROM  encounter WHERE encounter.campaign_id=$1`;

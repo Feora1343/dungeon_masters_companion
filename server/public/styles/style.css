@@ -82,19 +82,6 @@ li {
   padding: 5px;
 }
 
-/* li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  text-decoration: underline;
-  color: #eee;
-} */
-
 .fabToolbardemoBasicUsage md-fab-toolbar.md-right md-fab-trigger.align-with-text {
   left: 7px;
 }
@@ -135,7 +122,7 @@ md-tabs md-ink-bar {
   font-size: 1.0em;
   opacity: 0.8;
   text-transform: none;
-  max-width: 500px;
+  max-width: 620px;
   margin: auto;
 }
 
@@ -171,11 +158,10 @@ md-fab-toolbar md-toolbar.pevents__initial {
 
 .md-tab {
   overflow-wrap: normal;
-  line-height: 16px;
-  padding: 6px 12px;
   text-overflow: initial;
   white-space: normal;
   font-size: 12px;
+  min-width: 310px;
 }
 
 md-select {
