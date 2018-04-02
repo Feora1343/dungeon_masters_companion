@@ -8,22 +8,23 @@ const router = express.Router();
 
 let getCharacterByNameAndCampaignId = function (character_name, campaign_id) {
   const queryText = `SELECT character_id FROM character WHERE character_name =$1 AND campaign_id=$2`;
-  var character_id = null;
-  pool.query(queryText, [character_name, campaign_id])
+  return pool.query(queryText, [character_name, campaign_id])
     .then((result) => {
-      character_id = result;
+      console.log('result is', result.rows[0].character_id);
+      character_id = result.rows[0].character_id;
+      return character_id;
     })
-  return character_id;
 }
+
 
 let getMonsterByNameAndCampaignId = function (monster_name, campaign_id) {
   const queryText = `SELECT monster_id FROM monster WHERE monster_name =$1 AND campaign_id=$2`;
-  var monster_id = null;
-  pool.query(queryText, [monster_name, campaign_id])
+  return pool.query(queryText, [monster_name, campaign_id])
     .then((result) => {
-      monster_id = result;
+      console.log('result is', result.rows[0].monster_id);
+      monster_id = result.rows[0].monster_id;
+      return monster_id;
     })
-  return monster_id;
 }
 
 
@@ -120,7 +121,7 @@ router.post('/monster', (req, res) => {
 router.post('/encounter', (req, res) => {
   if (req.isAuthenticated()) {
     console.log(req.body);
-    
+
     const encounter_name = req.body.encounter_name;
     const campaign_id = req.body.campaign_id;
     const monsterNameList = req.body.monster;
@@ -156,26 +157,29 @@ router.post('/encounter', (req, res) => {
     })
 
     for (var character_name of characterNameList) {
-      character_id = getCharacterByNameAndCampaignId(character_name, campaign_id);
-      const queryText = 'INSERT INTO encounter_character (character_id, encounter_id) VALUES ($1, $2)';
-      pool.query(queryText, [character_id, campaign_id], (err, result) => {
-        if (err) {
-          console.log('Error inserting data into encounter', err);
-        }
-      })
+      console.log('Getting id for character_name', character_name);
+      getCharacterByNameAndCampaignId(character_name, campaign_id)
+        .then((character_id) => {
+          const queryText = 'INSERT INTO encounter_character (character_id, encounter_id) VALUES ($1, $2)';
+          pool.query(queryText, [character_id, campaign_id], (err, result) => {
+            if (err) {
+              console.log('Error inserting data into encounter', err);
+            }
+          })
+        })
     }
 
     for (var monster_name of monsterNameList) {
-      monster_id = getMonsterByNameAndCampaignId(monster_name, campaign_id)
-      const queryText = 'INSERT INTO encounter_monster (monster_id, encounter_id) VALUES ($1, $2)';
-      pool.query(queryText, [monster_id, campaign_id], (err, result) => {
-        if (err) {
-          console.log('Error inserting data into encounter', err);
-          res.sendStatus(500);
-        } else {
-          res.sendStatus(403);
-        }
-      })
+      console.log('Getting id for monster_name', monster_name);
+      getMonsterByNameAndCampaignId(monster_name, campaign_id)
+        .then((monster_id) => {
+          const queryText = 'INSERT INTO encounter_monster (monster_id, encounter_id) VALUES ($1, $2)';
+          pool.query(queryText, [monster_id, campaign_id], (err, result) => {
+            if (err) {
+              console.log('Error inserting data into encounter', err);
+            }
+          })
+        })
     }
     res.sendStatus(201);
   }

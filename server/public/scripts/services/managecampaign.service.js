@@ -119,7 +119,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
             .then(function (response) {
                 self.monsterList.list = response.data;
                 console.log(self.monsterList.list);
-                
+
             })
             .catch(function (error) {
                 self.message = "Something has gone terribly wrong!"
@@ -169,16 +169,24 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
 
     // POST Create Encounter
     self.addEncounter = function (encounter, campaign_id, character, monster) {
-        console.log(encounter, campaign_id, character, monster);
+        console.log('abcd', encounter, campaign_id, character, monster);
         let new_encounter = {
-            encounter_name: encounter.encounter_name,
+            encounter_name: encounter,
             campaign_id: campaign_id,
-
+            character: character,
+            monster: monster
         }
         // TODO: INSERT CHARACTER AND MONSTER NOT EMPTY LIST
         if (encounter.encounter_name === '' || encounter.campaign_id === '') {
             self.message = "Enter a encounter name, select a Campaign, select some characters as well as monsters!"
         } else {
+
+            // var postData = {
+            //     encounter: encounter,
+            //     character: character,
+            //     monster: monster
+            // }
+
             $http.post('/campaign/encounter', new_encounter)
                 .then(function (response) {
                     self.showAddEncounter = false;
@@ -205,7 +213,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
                 dangerMode: true,
                 closeOnClickOutside: false
             })
-            .then(function(willDelete) {
+            .then(function (willDelete) {
                 if (willDelete) {
                     $http.delete(`/campaign/character/${character_id}`)
                         .then(function (response) {
@@ -236,7 +244,7 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
                 dangerMode: true,
                 closeOnClickOutside: false
             })
-            .then(function(willDelete) {
+            .then(function (willDelete) {
                 if (willDelete) {
                     $http.delete(`/campaign/monster/${monster_id}`)
                         .then(function (response) {
@@ -260,31 +268,31 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
 
     // DELETE Delete Encounter
     self.deleteEncounter = function (encounter, campaign_id) {
-            swal({
-                    text: "Are you sure you want to delete this encounter?",
-                    icon: "warning",
-                    buttons: ["Not Yet", "Yes, Delete."],
-                    dangerMode: true,
-                    closeOnClickOutside: false
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        const encounter_id = id;
-                        $http.delete(`/encounter/${id}`)
-                            .then(function (response) {
-                                swal({
-                                    title: "The encounterhas been removed!",
-                                    icon: "../images/sweetalerts/deleteencounter.png"
-                                });
-                                self.getEncounterList(encounter_id);
-                            })
-                            .catch(function (error) {
-                                console.log('error, response:', response);
-                                self.message = "Something has gone terribly wrong!"
+        swal({
+                text: "Are you sure you want to delete this encounter?",
+                icon: "warning",
+                buttons: ["Not Yet", "Yes, Delete."],
+                dangerMode: true,
+                closeOnClickOutside: false
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    const encounter_id = id;
+                    $http.delete(`/encounter/${id}`)
+                        .then(function (response) {
+                            swal({
+                                title: "The encounterhas been removed!",
+                                icon: "../images/sweetalerts/deleteencounter.png"
                             });
-                    } else {
-                        swal('The encounter will not be removed.');
-                    }
-                });
-        }
+                            self.getEncounterList(encounter_id);
+                        })
+                        .catch(function (error) {
+                            console.log('error, response:', response);
+                            self.message = "Something has gone terribly wrong!"
+                        });
+                } else {
+                    swal('The encounter will not be removed.');
+                }
+            });
+    }
 }])
