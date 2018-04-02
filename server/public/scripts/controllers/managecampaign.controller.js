@@ -308,7 +308,7 @@ myApp.controller('CampaignServiceController', ['$http', 'UserService', 'Campaign
   self.addEncounter = function (encounter, campaign, character, monster) {
     console.log(encounter, campaign, character, monster);
     
-    CampaignService.addEncounter(encounter, campaign.campaign_id, character.character_id, monster.monster_id);
+    CampaignService.addEncounter(encounter, campaign, character, monster);
   }
 
   // ENCOUNTER: CampaignService to delete an encounter

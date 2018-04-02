@@ -168,10 +168,15 @@ myApp.service('CampaignService', ['$http', '$location', function ($http, $locati
     }
 
     // POST Create Encounter
-    self.addEncounter = function (encounter, campaign_id, character_id, monster_id) {
-        console.log(encounter, campaign_id, character_id, monster_id);
-        
-        if (encounter.encounter_name === '' || encounter.campaign_id === '' || character.character_id === '' || monster.monster_id === '') {
+    self.addEncounter = function (encounter, campaign_id, character, monster) {
+        console.log(encounter, campaign_id, character, monster);
+        let new_encounter = {
+            encounter_name: encounter.encounter_name,
+            campaign_id: campaign_id,
+
+        }
+        // TODO: INSERT CHARACTER AND MONSTER NOT EMPTY LIST
+        if (encounter.encounter_name === '' || encounter.campaign_id === '') {
             self.message = "Enter a encounter name, select a Campaign, select some characters as well as monsters!"
         } else {
             $http.post('/encounter', encounter)

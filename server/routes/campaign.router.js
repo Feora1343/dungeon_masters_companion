@@ -5,6 +5,28 @@ const userStrategy = require('../strategies/sql.localstrategy');
 const pool = require('../modules/pool.js');
 const router = express.Router();
 
+
+let getCharacterByNameAndCampaignId = function (character_name, campaign_id) {
+  const queryText = `SELECT character_id FROM character WHERE character_name =$1 AND campaign_id=$2`;
+  var character_id = null;
+  pool.query(queryText, [character_name, campaign_id])
+    .then((result) => {
+      character_id = result;
+    })
+  return character_id;
+}
+
+let getMonsterByNameAndCampaignId = function (monster_name, campaign_id) {
+  const queryText = `SELECT monster_id FROM monster WHERE monster_name =$1 AND campaign_id=$2`;
+  var monster_id = null;
+  pool.query(queryText, [monster_name, campaign_id])
+    .then((result) => {
+      monster_id = result;
+    })
+  return monster_id;
+}
+
+
 // POST campaign to the database
 router.post('/', (req, res) => {
   if (req.isAuthenticated()) {
@@ -99,53 +121,52 @@ router.post('/encounter', (req, res) => {
   if (req.isAuthenticated()) {
     const encounter_name = req.body.encounter_name;
     const campaign_id = req.body.campaign_id;
+    const monsterNameList = req.body.monster;
+    const characterNameList = req.body.character;
+    console.log('In router create encounter', encounter_name, campaign_id, monsterNameList, characterNameList);
 
     var saveEncounter = {
       encounter_name: encounter_name,
       campaign_id: campaign_id
     }
 
-    const monster_name = req.body.monster_name;
-    const monster_icon = req.body.monster_icon;
+    // const monster_name = req.body.monster_name;
+    // const monster_icon = req.body.monster_icon;
 
     var saveMonster = {
       monster_name: monster_name,
       monster_icon: monster_icon
     }
 
-    const character_name = req.body.character_name;
-    const character_icon = req.body.character_icon;
+    // const character_name = req.body.character_name;
+    // const character_icon = req.body.character_icon;
 
     var saveEncounterCharacter = {
       character_id: character_id,
-      encounter_id: encounter_id,
+      encounter_id: encounter_id
     }
 
     const queryText = 'INSERT INTO encounter (encounter_name, campaign_id) VALUES ($1, $2)';
     pool.query(queryText, [saveEncounterCharacter.encounter_name, saveEncounterCharacter.campaign_id], (err, result) => {
       if (err) {
         console.log('Error inserting data into encounter', err);
-        res.sendStatus(500);
-      } else {
-        res.sendStatus(201);
       }
     })
 
-    for (var character of characterList.List) {
+    for (var character_name of characterNameList) {
+      character_id = getCharacterByNameAndCampaignId(character_name, campaign_id);
       const queryText = 'INSERT INTO encounter_character (character_id, encounter_id) VALUES ($1, $2)';
-      pool.query(queryText, [saveEncounter.encounter_name, saveEncounter.campaign_id], (err, result) => {
+      pool.query(queryText, [character_id, campaign_id], (err, result) => {
         if (err) {
           console.log('Error inserting data into encounter', err);
-          res.sendStatus(500);
-        } else {
-          res.sendStatus(403);
         }
       })
     }
 
-    for (var monster of monsterList.List) {
+    for (var monster_name of monsterNameList) {
+      monster_id = getMonsterByNameAndCampaignId(monster_name, campaign_id)
       const queryText = 'INSERT INTO encounter_monster (monster_id, encounter_id) VALUES ($1, $2)';
-      pool.query(queryText, [saveEncounter.encounter_name, saveEncounter.campaign_id], (err, result) => {
+      pool.query(queryText, [monster_id, campaign_id], (err, result) => {
         if (err) {
           console.log('Error inserting data into encounter', err);
           res.sendStatus(500);
@@ -154,6 +175,7 @@ router.post('/encounter', (req, res) => {
         }
       })
     }
+    res.sendStatus(201);
   }
 })
 
@@ -200,7 +222,7 @@ router.get('/monster/:id', (req, res) => {
   if (req.isAuthenticated()) {
     const id = req.params.id;
     console.log(id);
-    
+
     const queryText = `SELECT monster.monster_id, monster_name, monster_icon, campaign_id FROM monster WHERE monster.campaign_id=$1`;
     pool.query(queryText, [id])
       .then((result) => {
