@@ -1,7 +1,7 @@
 <div class="user-bg">
     <div layout="row">
-        <h3 flex style="margin: 0 0 0 60px;" layout="row" id="welcome" class="welcome">Welcome, {{vm.userObject.userName}}!</h3>
-        <md-button style="margin: 0 60px 0 0;" aria-label="Sign out" class="md-fab md-mini" ng-click="vm.userService.logout()">
+        <h3 flex layout="row" id="welcome" class="welcome">Welcome, {{vm.userObject.userName}}!</h3>
+        <md-button aria-label="Sign out" class="md-fab md-mini signout" ng-click="vm.userService.logout()">
             <md-tooltip md-direction="left">Sign Out</md-tooltip>
             <md-icon md-font-icon="mi mi-power-settings-new"></md-icon>
         </md-button>
@@ -14,7 +14,7 @@
                 </div>
 
                 <div flex-xs flex-gt-xs="50" layout="row">
-                    <md-card style="opacity: 0.8;height:600px">
+                    <md-card class="main-card">
                         <div id="dmcDialog">
                             <md-tabs flex layout="column" md-stretch-tabs="always" md-dynamic-height md-no-ink md-stretch-tabs="auto">
                                 <md-tabs-wrapper class="tb-wrp md-stretch-tabs">
@@ -23,37 +23,32 @@
                                         <md-content class="tab-content md-padding" ng-controller="ManageCampaign">
                                             <div layout="row" id="labels">
                                                 <md-card>
-                                                    <md-button style="width:175px;" ng-click="createCampaignDialog($event)" class="md-raised md-primary" type="submit" name="submit"
-                                                        value="Create Campaign">Create Campaign</md-button>
-                                                    <md-button style="width:175px;" ng-click="createCharacterDialog($event)" class="md-raised md-primary" type="submit" name="submit"
-                                                        value="Create Character">Create Character</md-button>
-                                                    <md-button style="width:175px;" ng-click="createMonsterDialog($event)" class="md-raised md-primary" type="submit" name="submit"
-                                                        value="Create Monster">Create Monster</md-button>
-                                                    <md-button style="width:175px;" ng-click="createEncounterDialog($event)" class="md-raised md-primary" type="submit" name="submit"
-                                                        value="Create Encounter">Create Encounter</md-button>
+                                                    <md-button ng-click="createCampaignDialog($event)" class="md-raised md-primary create" type="submit" name="submit" value="Create Campaign">Create Campaign</md-button>
+                                                    <md-button ng-click="createCharacterDialog($event)" class="md-raised md-primary create" type="submit" name="submit" value="Create Character">Create Character</md-button>
+                                                    <md-button ng-click="createMonsterDialog($event)" class="md-raised md-primary create" type="submit" name="submit" value="Create Monster">Create Monster</md-button>
+                                                    <md-button ng-click="createEncounterDialog($event)" class="md-raised md-primary create" type="submit" name="submit" value="Create Encounter">Create Encounter</md-button>
                                                 </md-card>
                                                 <md-card ng-controller="CampaignServiceController as cc">
-                                                    <md-select flex placeholder="Select Campaign" ng-model="campaign" ng-change="onChange()" style="width: 300px;">
+                                                    <md-select flex class="campaign-encounter-select" placeholder="Select Campaign" ng-model="campaign" ng-change="onChange()">
                                                         <md-option ng-value="campaign" ng-repeat="campaign in cc.campaignList.list" ng-model="cc.campaignList.list">{{campaign.campaign_name}}</md-option>
                                                     </md-select>
 
-                                                    <h3 center style="text-align:center;vertical-align: middle;line-height: 30px;" value="campaign.campaign_notes">Campaign Notes
+                                                    <h3 center class="notes" value="campaign.campaign_notes">Campaign Notes
                                                         <hr />{{ campaign.campaign_notes }}</h3>
                                                 </md-card>
                                             </div>
                                             <div layout="row" id="labels">
 
-                                                <md-card style="width:245px;max-height:325px;" ng-controller="CampaignServiceController as cc">
+                                                <md-card class="character-monster-card" ng-controller="CampaignServiceController as cc">
                                                     <md-title>
-                                                        <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Characters</h4>
+                                                        <h4 class="name-list">Characters</h4>
                                                         <hr />
                                                     </md-title>
                                                     <md-content>
                                                         <ul>
-                                                            <li ng-repeat="character in cc.characterList.list" style="vertical-align:middle;">
-                                                                <img style="zoom:75%;padding:10px;vertical-align:middle;" ng-src="{{character.character_icon}}" />{{character.character_name}}
-                                                                <md-button ng-click="cc.deleteCharacter(character)" style="float:right;margin: 10px 0px 0px 0px;" class="md-fab md-mini"
-                                                                    aria-label="Delete Character">
+                                                            <li class="list-names" ng-repeat="character in cc.characterList.list">
+                                                                <img class="character-image" ng-src="{{character.character_icon}}" />{{character.character_name}}
+                                                                <md-button ng-click="cc.deleteCharacter(character)" class="md-fab md-mini delete-character-monster" aria-label="Delete Character">
                                                                     <md-icon md-font-icon="mi mi-delete"></md-icon>
                                                                 </md-button>
                                                             </li>
@@ -61,16 +56,16 @@
                                                     </md-content>
                                                 </md-card>
 
-                                                <md-card style="width:245px;max-height:325px;" ng-controller="CampaignServiceController as cc">
+                                                <md-card class="character-monster-card" ng-controller="CampaignServiceController as cc">
                                                     <md-title>
-                                                        <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Monsters</h4>
+                                                        <h4 class="name-list">Monsters</h4>
                                                         <hr />
                                                     </md-title>
                                                     <md-content>
                                                         <ul>
-                                                            <li ng-repeat="monster in cc.monsterList.list" style="vertical-align:middle;">
-                                                                <img style="zoom:20%;padding:10px;vertical-align:middle;" ng-src="{{monster.monster_icon}}" />{{monster.monster_name}}
-                                                                <md-button ng-click="cc.deleteMonster(monster)" style="float:right;margin: 10px 0px 0px 0px;" class="md-fab md-mini" aria-label="Delete Monster">
+                                                            <li class="list-names" ng-repeat="monster in cc.monsterList.list">
+                                                                <img class="monster-image" ng-src="{{monster.monster_icon}}" />{{monster.monster_name}}
+                                                                <md-button ng-click="cc.deleteMonster(monster)" class="md-fab md-mini delete-character-monster" aria-label="Delete Monster">
                                                                     <md-icon md-font-icon="mi mi-delete"></md-icon>
                                                                 </md-button>
                                                             </li>
@@ -85,37 +80,47 @@
                                             <div layout="row" id="labels">
                                                 <md-card>
                                                     <md-card ng-controller="CampaignServiceController as cc">
-                                                        <md-select flex placeholder="Select Campaign" ng-model="campaign" ng-change="onChange()" style="width: 250px;">
+                                                        <md-select class="initiative-select" flex placeholder="Select Campaign" ng-model="campaign" ng-change="onChange()">
                                                             <md-option ng-value="campaign" ng-repeat="campaign in cc.campaignList.list" ng-model="cc.campaignList.list">{{campaign.campaign_name}}</md-option>
                                                         </md-select>
 
-                                                        <h3 center style="text-align:center;vertical-align: middle;line-height: 30px;" value="campaign.campaign_notes">Campaign Notes
+                                                        <h3 center class="notes" value="campaign.campaign_notes">Campaign Notes
                                                             <hr />{{ campaign.campaign_notes }}</h3>
                                                     </md-card>
                                                 </md-card>
                                                 <md-card ng-controller="CampaignServiceController as cc">
-                                                    <md-select flex placeholder="Select Encounter" ng-model="encounter" ng-change="onLoad()" style="width: 250px;">
+                                                    <md-select class="initiative-select" flex placeholder="Select Encounter" ng-model="encounter" ng-change="onLoad()">
                                                         <md-option ng-value="encounter" ng-repeat="encounter in cc.encounterList.list" ng-model="cc.encounterList.list">{{encounter.encounter_name}}</md-option>
                                                     </md-select>
 
-                                                    <h3 center style="text-align:center;vertical-align: middle;line-height: 30px;" value="encounter.encounter_name">Encounter Name
+                                                    <h3 center class="notes" value="encounter.encounter_name">Encounter Name
                                                         <hr />{{ encounter.encounter_name }}</h3>
                                                 </md-card>
                                             </div>
                                             <div layout="row" id="labels">
 
-                                                <md-card style="min-width:530px;max-height:325px;" ng-controller="CampaignServiceController as cc">
+                                                <md-card class="initiative-card" ng-controller="CampaignServiceController as cc">
                                                     <md-title>
-                                                        <h4 style="text-align:center;vertical-align: middle;line-height: 10px;">Characters and Monsters<md-button class="md-raised md-primary">Sort Initiative</md-button></h4>
+                                                        <h4 class="name-list">Characters and Monsters
+                                                            <md-button class="md-raised md-primary">Sort Initiative</md-button>
+                                                        </h4>
                                                         <hr />
                                                     </md-title>
                                                     <md-content>
                                                         <ul>
-                                                            <li ng-repeat="character in cc.characterList.list" style="vertical-align:middle;">
-                                                                <img style="zoom:75%;padding:10px;vertical-align:middle;" ng-src="{{character.character_icon}}" />{{character.character_name}}<md-input-container style="max-width:50px;vertical-align:middle;padding: 5px 0 0 20px;"><label style="padding: 5px 0 0 20px;">Initiative</label><input type="text"></md-input-container>
+                                                            <li class="list-names" ng-repeat="character in cc.characterList.list">
+                                                                <img class="character-image" ng-src="{{character.character_icon}}" />{{character.character_name}}
+                                                                <md-input-container class="initiative-containers">
+                                                                    <label class="initiative-label">Initiative</label>
+                                                                    <input type="text">
+                                                                </md-input-container>
                                                             </li>
-                                                            <li ng-repeat="monster in cc.monsterList.list" style="vertical-align:middle;">
-                                                                <img style="zoom:20%;padding:10px;vertical-align:middle;" ng-src="{{monster.monster_icon}}" />{{monster.monster_name}}<md-input-container style="max-width:50px;vertical-align:middle;padding: 5px 0 0 20px;"><label style="padding: 5px 0 0 20px;">Initiative</label><input type="text"></md-input-container>
+                                                            <li class="list-names" ng-repeat="monster in cc.monsterList.list">
+                                                                <img class="monster-image" ng-src="{{monster.monster_icon}}" />{{monster.monster_name}}
+                                                                <md-input-container class="initiative-containers">
+                                                                    <label class="initiative-label">Initiative</label>
+                                                                    <input type="text">
+                                                                </md-input-container>
                                                             </li>
                                                         </ul>
                                                     </md-content>

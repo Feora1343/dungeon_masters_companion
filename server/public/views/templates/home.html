@@ -10,11 +10,11 @@
                 <md-content class="tab-content md-padding" flex>
                   <form ng-submit="lc.login()">
                     <md-input-container class="md-icon-float md-block">
-                      <md-icon style="position: absolute;" aria-label="Username" md-font-icon="mi mi-person"></md-icon>
+                      <md-icon class="icon" aria-label="Username" md-font-icon="mi mi-person"></md-icon>
                       <input ng-model="lc.user.username" type="username" placeholder="Username" ng-required="true">
                     </md-input-container>
                     <md-input-container class="md-icon-float md-block">
-                      <md-icon style="position: absolute;" aria-label="Password" md-font-icon="mi mi-lock"></md-icon>
+                      <md-icon class="icon" aria-label="Password" md-font-icon="mi mi-lock"></md-icon>
                       <input ng-model="lc.user.password" type="password" placeholder="Password" ng-required="true">
                     </md-input-container>
                     <div layout="row" id="labels">
@@ -31,11 +31,11 @@
                 <md-content class="md-padding" ng-controller="RegisterController as rc">
                   <form ng-submit="rc.registerUser()">
                     <md-input-container class="md-icon-float md-block">
-                      <md-icon style="position: absolute;" aria-label="Username" md-font-icon="mi mi-person"></md-icon>
+                      <md-icon class="icon" aria-label="Username" md-font-icon="mi mi-person"></md-icon>
                       <input ng-model="rc.user.username" type="username" placeholder="Username" ng-required="true">
                     </md-input-container>
                     <md-input-container class="md-icon-float md-block">
-                      <md-icon style="position: absolute;" aria-label="Password" md-font-icon="mi mi-lock"></md-icon>
+                      <md-icon class="icon" aria-label="Password" md-font-icon="mi mi-lock"></md-icon>
                       <input ng-model="rc.user.password" type="password" placeholder="Password" ng-required="true">
                     </md-input-container>
                     <div layout="row" flex>

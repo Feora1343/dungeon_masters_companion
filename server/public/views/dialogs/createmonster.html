@@ -13,28 +13,28 @@
             <md-dialog-content class="md-padding" layout="row">
                 <div class="md-dialog-content">
                     <md-card>
-                        <md-content style="width:800px;" class="md-padding" ng-controller="CampaignServiceController as cc">
+                        <md-content class="md-padding create-monster" ng-controller="CampaignServiceController as cc">
                             <form>
                                 <md-input-container class="md-icon-float md-block">
-                                    <md-icon style="position: absolute;" aria-label="Monster Name" md-font-icon="mi mi-person"></md-icon>
+                                    <md-icon class="icon" aria-label="Monster Name" md-font-icon="mi mi-person"></md-icon>
                                     <input flex-gt-xs="50" ng-model="cc.monster.monster_name" type="monster name" placeholder="Monster Name" ng-required="true">
                                 </md-input-container>
                                 <md-input-container class="md-icon-float md-block">
-                                    <md-icon style="position: absolute;" aria-label="Monster Class" md-font-icon="mi mi-photo"></md-icon>
+                                    <md-icon class="icon" aria-label="Monster Class" md-font-icon="mi mi-photo"></md-icon>
                                     <md-select flex-gt-xs="50" placeholder="Select Monster Class" ng-model="cc.monster.monster_icon">
                                         <md-select-label>
                                             <img ng-src="{{ monster.image }}" />
                                         </md-select-label>
                                         <md-option ng-repeat="monster in monsters track by $index" ng-value="monster.image">
                                             <div layout="row">
-                                                <img style="zoom:20%;" ng-src="{{monster.image}}" />
-                                                <p style="font-size:75%;padding:0px 5px;">{{monster.value}}</p>
+                                                <img class="monster-image" ng-src="{{monster.image}}" />
+                                                <p class="create-character-text ">{{monster.value}}</p>
                                             </div>
                                         </md-option>
                                     </md-select>
                                 </md-input-container>
                                 <md-input-container class="md-icon-float md-block">
-                                    <md-icon style="position: absolute;" aria-label="Select Campaign" md-font-icon="mi mi-person"></md-icon>
+                                    <md-icon class="icon" aria-label="Select Campaign" md-font-icon="mi mi-person"></md-icon>
                                     <md-select flex-gt-xs="50" placeholder="Select Campaign" ng-model="cc.campaign" md-on-open="loadCampaign()">
                                         <md-option ng-value="campaign" ng-repeat="campaign in cc.campaignList.list">{{campaign.campaign_name}}</md-option>
                                     </md-select>

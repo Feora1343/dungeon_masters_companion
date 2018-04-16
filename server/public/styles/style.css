@@ -143,6 +143,11 @@ md-fab-toolbar md-toolbar.pevents__initial {
 .welcome {
   margin: 0px 0px;
   color: white;
+  margin: 0 0 0 60px;
+}
+
+button.md-fab.md-mini.signout.md-button.md-ink-ripple {
+  margin: 0 60px 0 0;
 }
 
 #dmcDialog {
@@ -178,4 +183,114 @@ md-select {
   height: 100%;
   width: 100%;
   padding: 0;
+}
+
+md-icon.icon {
+  position: absolute;
+}
+
+button.md-raised.md-primary.create.md-button {
+  width: 175px;
+}
+
+.main-card {
+  opacity: 0.8;
+  height: 600px
+}
+
+.character-monster-card {
+  width: 245px;
+  max-height: 325px;
+}
+
+.notes {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+}
+
+.campaign-encounter-select {
+  width: 300px;
+}
+
+.name-list {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 10px;
+}
+
+.list-names {
+  vertical-align: middle;
+}
+
+.character-image {
+  zoom: 75%;
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.create-character-image {
+  zoom: 50%;
+}
+
+.create-character-text {
+  font-size: 75%;
+  padding: 0px 5px;
+}
+
+.monster-image {
+  zoom: 20%;
+  padding: 10px;
+  vertical-align: middle;
+}
+
+button.md-fab.md-mini.delete-character-monster.md-button {
+  float: right;
+  margin: 10px 0px 0px 0px;
+}
+
+.initiative-select {
+  width: 250px;
+}
+
+.initiative-card {
+  min-width: 530px;
+  max-height: 325px;
+}
+
+.initiative-containers {
+  max-width: 50px;
+  vertical-align: middle;
+  padding: 5px 0 0 20px;
+}
+
+.initiative-labels {
+  padding: 5px 0 0 20px;
+}
+
+.create-campaign {
+  width: 800px;
+}
+
+.create-character {
+  width: 800px;
+}
+
+.create-monster {
+  width: 800px;
+}
+
+.create-encounter {
+  width: 800px;
+}
+
+.create-encounter-select-campaign {
+  float: left;
+  width: 300px;
+}
+
+/* style="max-width:800px;max-height:810px;" */
+
+.md-tab.inspiration-tab {
+  max-width: 200px;
 }
