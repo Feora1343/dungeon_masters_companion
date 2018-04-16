@@ -4,6 +4,9 @@ This is my Dungeon Master's Companion application. It's still currently in alpha
 
 I want this application to be a companion application for Dungeon/Game Master's
 
+Update: 4/15/18
+* I look to continue work on this project after 5/4/18.
+
 ## Technolgoies Used To Build Application
 
 Here are the technologies used with this project (SEAN STACK).
@@ -46,7 +49,6 @@ Then it will be as simple as typing `npm start` to start up the application and 
 - [ ] Initiative Tracker
 - [ ] Delete Campaign
 - [ ] Update Campaign, Characters, Monsters, Encounters
-
 
 ### Beta Features
 
