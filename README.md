@@ -1,65 +1,64 @@
-# Name of Project
+# Dungeon Master's Companion
 
-One Paragraph of project description goes here. Link to the live version of the app if it's hosted on Heroku.
+This is my Dungeon Master's Companion application. It's still currently in alpha. Below you can see where the application is currently at in its progress and where I am looking to take this application.
 
-## Built With
+I want this application to be a companion application for Dungeon/Game Master's
 
-List technologies and frameworks here
+## Technolgoies Used To Build Application
 
-## Getting Started
+Here are the technologies used with this project (SEAN STACK).
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+```
+,___________,         .----------,  _Request_    .------------,         .----------.
+|___________|       ,'_________,'|   -> | ->   ,'___________,'|        ( ~--------~ )
+| HTML5     |      | AngularJS | |      |      | Node.js    | |        | PostgreSQL |
+| CSS3      |      | SweetAlert| |      |      | Express.js | |        | ~--------~ |
+| Angular   | <--  | Angular   | |      |      |            | |        |            |        
+|  Material |      |  Material | ;   <- | <-   |            | ;        | ~--------~ |
+|___________|      |___________|'  _Response_  |____________|'         `.__________.'
+   Client           Client Logic            Server & Framework         Database
+           *Front End*                                     *Back End*    
+```
 
 ### Prerequisites
 
 Link to software that is required to install the app (e.g. node).
 
 - [Node.js](https://nodejs.org/en/)
-- List other prerequisites here
-
+- PostgreSQL database
+  - Please see the database.sql file, it will give you the queries you need to create the database.
+  - The database name will have to be called "dmc".
 
 ### Installing
 
-Steps to get the development environment running.
+Once you clone the repo, you will want to run `npm i` to install all the modules so that the repo should function properly.
 
-```sql
-CREATE TABLE "users" (
-  "id" serial primary key,
-  "username" varchar(80) not null UNIQUE,
-  "password" varchar(240) not null
-);
-```
+Then it will be as simple as typing `npm start` to start up the application and you can access it on your browser at `http://localhost:5000/`
 
-## Screen Shot
+### Alpha Features
 
-Include one or two screen shots of your project here (optional). Remove if unused.
+- [x] Can register new users and login.
+- [x] Toolbar created that shows profile, change log, inspirations, etc.
+- [x] Create Campaign.
+- [x] Create Characters.
+- [x] Create Monsters.
+- [x] Create Encounters.
+- [ ] Initiative Tracker
+- [ ] Delete Campaign
+- [ ] Update Campaign, Characters, Monsters, Encounters
 
-## Documentation
 
-Link to a read-only version of your scope document or other relevant documentation here (optional). Remove if unused.
+### Beta Features
 
-### Completed Features
-
-High level list of items completed.
-
-- [x] Feature a
-- [x] Feature b
-
-### Next Steps
-
-Features that you would like to add at some point in the future.
-
-- [ ] Feature c
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+- [ ] Integrate an API or other application to reference D&D source material.
+- [ ] Update Profile
 
 ## Authors
 
-* Name of author(s)
+* Renee Vorbeck
 
+### Biggest Thing I learned With This Project?
 
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
+* First major project using Angular Material.
+* mdDialog popups.
+* Creating a POST that handles three queries, two of which are use loops for multiple items.
